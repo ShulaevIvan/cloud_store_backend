@@ -1,30 +1,26 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from .models import CloudUser
 from django.shortcuts import get_object_or_404
 
 from rest_framework.decorators import authentication_classes, permission_classes
+from rest_framework.viewsets  import ModelViewSet
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-from rest_framework.views import APIView
-
-
-from .serializers import UserSerializer
+from .serializers import CloudUserSerializer, CloudUsersSerializer
 
 
 
 @api_view(['POST'])
 def login(request):
     user = get_object_or_404(CloudUser, username=request.data['username'])
-    print(user.store_path)
     if not user.check_password(request.data['password']):
         return Response({'detail': 'Not found.',}, status=status.HTTP_404_NOT_FOUND)
     token, created = Token.objects.get_or_create(user=user)
-    serializer = UserSerializer(instance=user)
+    serializer = CloudUserSerializer(instance=user)
     return Response({ 
         'token': token.key,
         'user': serializer.data
@@ -32,7 +28,7 @@ def login(request):
 
 @api_view(['POST'])
 def singup(request):
-    serializer = UserSerializer(data=request.data)
+    serializer = CloudUserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
         user = CloudUser.objects.get(username = request.data['username'])
@@ -54,4 +50,10 @@ def singup(request):
 @api_view(['GET'])
 def test_token(request):
     return Response('passed {}'.format(request.user.email))
+
+@api_view(['GET'])
+def get_users(request):
+    users = CloudUser.objects.all()
+    serializer = CloudUsersSerializer(users, many=True)
+    return Response({'users': serializer.data})
 
