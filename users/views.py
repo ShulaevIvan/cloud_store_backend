@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import CloudUser
 from django.shortcuts import get_object_or_404
+import json
 
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.viewsets  import ModelViewSet
@@ -28,6 +29,7 @@ def login(request):
 
 @api_view(['POST'])
 def singup(request):
+    print(request)
     serializer = CloudUserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()

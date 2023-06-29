@@ -10,4 +10,4 @@ class CloudUserSerializer(serializers.ModelSerializer):
 class CloudUsersSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = CloudUser
-        fields = ['id', 'username', 'full_name', 'password', 'email', 'is_staff']
+        fields = ['id', 'username', 'full_name', 'email', 'is_staff']

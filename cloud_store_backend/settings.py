@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
     'users'
 ]
 
@@ -51,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'cloud_store_backend.urls'
@@ -136,3 +139,7 @@ REST_FRAMEWORK = {
     ],
 }
 AUTH_USER_MODEL = "users.CloudUser" 
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
