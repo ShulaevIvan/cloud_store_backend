@@ -1,0 +1,31 @@
+.register-form-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-width: 800px;
+}
+.register-from {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 10%;
+  margin-top: 10%;
+}
+.register-from input {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 300px;
+  margin-bottom: 10px;
+}
+.register-btn-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 300px;
+}
+.register-form-input-err {
+  border: 1px solid red;
+}

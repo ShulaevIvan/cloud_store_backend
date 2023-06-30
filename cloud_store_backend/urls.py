@@ -15,14 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.views.generic import TemplateView
 from rest_framework import routers
 from users.views import singup,login, test_token, get_users
+from .views import index
 
 
 router = routers.DefaultRouter()
 
 urlpatterns = [
+    path('', index),
+    path('manifest.json', TemplateView.as_view(template_name='manifest.json', content_type='application/json'), name='manifest.json'),
     path('admin/', admin.site.urls),
     path('singup/', singup),
     path('login/', login),
