@@ -18,18 +18,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework import routers
-from users.views import singup,login, test_token, get_users
+from users.views import singup,login, test_token, get_users, UserFilesViewSet
 from .views import index
 
 
 router = routers.DefaultRouter()
+router.register('api/users/user_files', UserFilesViewSet)
 
 urlpatterns = [
-    path('', index),
-    path('manifest.json', TemplateView.as_view(template_name='manifest.json', content_type='application/json'), name='manifest.json'),
+    # path('', index),
+    # path('manifest.json', TemplateView.as_view(template_name='manifest.json', content_type='application/json'), name='manifest.json'),
     path('admin/', admin.site.urls),
     path('singup/', singup),
     path('login/', login),
-     path('api/users/', get_users),
+    path('api/users/', get_users),
     path('test_token/', test_token),
-]
+] + router.urls

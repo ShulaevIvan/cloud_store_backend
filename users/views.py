@@ -11,7 +11,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.authtoken.models import Token
-from .serializers import CloudUserSerializer, CloudUsersSerializer
+from .serializers import CloudUserSerializer, CloudUsersSerializer, CloudUserFilesSerializer
+from .models import CloudUserFiles
 
 
 
@@ -59,3 +60,6 @@ def get_users(request):
     serializer = CloudUsersSerializer(users, many=True)
     return Response({'users': serializer.data})
 
+class UserFilesViewSet(ModelViewSet):
+    queryset = CloudUserFiles.objects.all()
+    serializer_class = CloudUserFilesSerializer
