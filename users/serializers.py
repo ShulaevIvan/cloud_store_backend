@@ -15,4 +15,5 @@ class CloudUsersSerializer(serializers.ModelSerializer):
 class CloudUserFilesSerializer(serializers.ModelSerializer):
     class Meta(object):
         model = CloudUserFiles
-        fields = ['id', 'file_name', 'file_type', 'file_data', 'file_url', 'user']
+        fields = ['id', 'file_name', 'file_type', 'file_url', 'user', 'file_comment']
+        # fields = ['id', 'file_name', 'file_type', 'file_data', 'file_url', 'user', 'file_comment']
