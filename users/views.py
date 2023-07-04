@@ -63,3 +63,4 @@ def get_users(request):
 class UserFilesViewSet(ModelViewSet):
     queryset = CloudUserFiles.objects.all()
     serializer_class = CloudUserFilesSerializer
+    filterset_fields = ['user']
