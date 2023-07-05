@@ -17,3 +17,18 @@ class CloudUserFilesSerializer(serializers.ModelSerializer):
         model = CloudUserFiles
         # fields = ['id', 'file_name', 'file_type', 'file_url', 'user', 'file_comment']
         fields = ['id', 'file_name', 'file_type', 'file_data', 'file_url', 'user', 'file_comment']
+
+        def update(self, instance, validated_data):
+            print(instance)
+            print(validated_data)
+
+            # positions = validated_data.pop('positions')
+            # stock = super().update(instance, validated_data)
+
+            # for position in positions:
+            #     stock_product, create_tuple = StockProduct.objects.update_or_create(stock=stock, product=position['product'])
+            #     stock_product.quantity = position['quantity']
+            #     stock_product.price = position['price']
+            #     stock_product.save()
+
+            # return stock

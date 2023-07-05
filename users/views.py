@@ -64,3 +64,10 @@ class UserFilesViewSet(ModelViewSet):
     queryset = CloudUserFiles.objects.all()
     serializer_class = CloudUserFilesSerializer
     filterset_fields = ['user']
+
+    def delete(self, request):
+        user = request.data['user']
+        file_id = request.data['id']
+        CloudUserFiles.objects.filter(id=file_id).delete()
+        
+        return Response(status=status.HTTP_204_NO_CONTENT)
