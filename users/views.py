@@ -60,6 +60,7 @@ def get_users(request):
     serializer = CloudUsersSerializer(users, many=True)
     return Response({'users': serializer.data})
 
+
 class UserFilesViewSet(ModelViewSet):
     queryset = CloudUserFiles.objects.all()
     serializer_class = CloudUserFilesSerializer
