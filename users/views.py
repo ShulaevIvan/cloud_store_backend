@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .models import CloudUser
 from django.shortcuts import get_object_or_404
 import os
+import base64
+import json
 
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.viewsets  import ModelViewSet
@@ -13,6 +15,7 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 from .serializers import CloudUserSerializer, CloudUsersSerializer, CloudUserFilesSerializer
 from .models import CloudUserFiles
+from .models import CloudUser
 
 
 
@@ -23,6 +26,11 @@ def login(request):
         return Response({'detail': 'Not found.',}, status=status.HTTP_404_NOT_FOUND)
     token, created = Token.objects.get_or_create(user=user)
     serializer = CloudUserSerializer(instance=user)
+    if os.path.exists(f'{os.getcwd()}/users_store/{user}'):
+        print('test')
+    else:
+        os.mkdir(f'{os.getcwd()}/users_store/{user}')
+
     return Response({ 
         'token': token.key,
         'user': serializer.data
@@ -33,14 +41,11 @@ def singup(request):
     serializer = CloudUserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-        user_path = f'{os.getcwd()}/users_store/{request.data["username"]}'
         user = CloudUser.objects.get(username = request.data['username'])
         user.set_password(request.data['password'])
         user.full_name = request.data['full_name']
-        user.store_path = user_path
         user.save()
         token = Token.objects.create(user=user)
-        os.mkdir(f'{user.store_path}')
 
         return Response({
             'token': token.key,
@@ -67,9 +72,28 @@ class UserFilesViewSet(ModelViewSet):
     serializer_class = CloudUserFilesSerializer
     filterset_fields = ['user']
 
-    def delete(self, request):
-        user = request.data['user']
-        file_id = request.data['id']
-        CloudUserFiles.objects.filter(id=file_id).delete()
+    # def create(self, request):
+    #     file_data = request.data['file_data']
+    #     user = CloudUser.objects.get(id=request.data['user'])
+            
+    #     CloudUserFiles.objects.create(
+    #         file_name = request.data['file_name'],
+    #         file_data = request.data['file_data'],
+    #         file_type = request.data['file_type'],
+    #         file_url = request.data['file_url'],
+    #         file_comment = request.data['file_comment'],
+    #         user = user
+    #     ).save()
+    #     file_data += "=" * ((4 - len(file_data) % 4) % 4)
+    #     # print(base64.b64decode(file_data))
+    #     with open("imageToSave.png", "wb") as fh:
+    #         fh.write(base64.b64decode(file_data))
+    #     return Response(request.data, status=status.HTTP_201_CREATED)
+
+    # def delete(self, request):
+    #     user = request.data['user']
+    #     file_id = request.data['id']
+    #     print(request)
+    #     CloudUserFiles.objects.filter(id=file_id).delete()
         
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
