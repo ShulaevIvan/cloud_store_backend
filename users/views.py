@@ -3,7 +3,8 @@ from .models import CloudUser
 from django.shortcuts import get_object_or_404
 import os
 import base64
-import json
+import re
+import uuid
 
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.viewsets  import ModelViewSet
@@ -72,23 +73,14 @@ class UserFilesViewSet(ModelViewSet):
     serializer_class = CloudUserFilesSerializer
     filterset_fields = ['user']
 
-    # def create(self, request):
-    #     file_data = request.data['file_data']
-    #     user = CloudUser.objects.get(id=request.data['user'])
-            
-    #     CloudUserFiles.objects.create(
-    #         file_name = request.data['file_name'],
-    #         file_data = request.data['file_data'],
-    #         file_type = request.data['file_type'],
-    #         file_url = request.data['file_url'],
-    #         file_comment = request.data['file_comment'],
-    #         user = user
-    #     ).save()
-    #     file_data += "=" * ((4 - len(file_data) % 4) % 4)
-    #     # print(base64.b64decode(file_data))
-    #     with open("imageToSave.png", "wb") as fh:
-    #         fh.write(base64.b64decode(file_data))
-    #     return Response(request.data, status=status.HTTP_201_CREATED)
+    def create(self, request, *args, **kwargs):
+        file_data = request.data['file_data']
+        file_type = re.findall(r'\.(\w+|\d+)$', request.data['file_name'])[0]
+
+        with open(f'{uuid.uuid4()}.{file_type}', "wb") as file:
+            file.write(base64.b64decode(file_data))
+        return super().create(request, *args, **kwargs)
+
 
     # def delete(self, request):
     #     user = request.data['user']
