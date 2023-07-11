@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework import routers
-from users.views import singup,login, test_token, get_users, UserFilesViewSet
+from users.views import singup,login, test_token, get_users, UserFilesViewSet, get_file
 from .views import index
 
 
@@ -33,4 +33,5 @@ urlpatterns = [
     path('login/', login),
     path('api/users/', get_users),
     path('test_token/', test_token),
+    path('<file_uid>/', get_file)
 ] + router.urls

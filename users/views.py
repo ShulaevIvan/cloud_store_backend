@@ -1,10 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from .models import CloudUser
 from django.shortcuts import get_object_or_404
+from django.utils.encoding import smart_str
 import os
 import base64
 import re
 import uuid
+import pathlib
+import mimetypes
+
 
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.viewsets  import ModelViewSet
@@ -12,6 +16,7 @@ from rest_framework.authentication import SessionAuthentication, TokenAuthentica
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from .serializers import CloudUserSerializer, CloudUsersSerializer, CloudUserFilesSerializer
@@ -27,10 +32,10 @@ def login(request):
         return Response({'detail': 'Not found.',}, status=status.HTTP_404_NOT_FOUND)
     token, created = Token.objects.get_or_create(user=user)
     serializer = CloudUserSerializer(instance=user)
-    if os.path.exists(f'{os.getcwd()}/users_store/{user}'):
+    if os.path.exists(f'users_store/{user}'):
         print('test')
     else:
-        os.mkdir(f'{os.getcwd()}/users_store/{user}')
+        os.mkdir(f'users_store/{user}')
 
     return Response({ 
         'token': token.key,
@@ -45,6 +50,7 @@ def singup(request):
         user = CloudUser.objects.get(username = request.data['username'])
         user.set_password(request.data['password'])
         user.full_name = request.data['full_name']
+        user.store_path = f'users_store/{user}'
         user.save()
         token = Token.objects.create(user=user)
 
@@ -68,17 +74,46 @@ def get_users(request):
     return Response({'users': serializer.data})
 
 
+def get_file(request, file_uid):
+    target_file = CloudUserFiles.objects.get(file_uid=file_uid)
+    file_path = target_file.file_path
+
+
+    with open(file_path, 'rb') as fh:
+        response = HttpResponse(fh.read(), content_type=target_file.file_type)
+        response['Content-Disposition'] = 'attachment; filename=' + file_path
+        
+        return response
+
+
 class UserFilesViewSet(ModelViewSet):
     queryset = CloudUserFiles.objects.all()
     serializer_class = CloudUserFilesSerializer
     filterset_fields = ['user']
 
     def create(self, request, *args, **kwargs):
+        print(request.data['file_name'])
+        user_id = request.data['user']
+        file_name = re.sub(r'\.(\w+|\d+)$', '', request.data['file_name'])
         file_data = request.data['file_data']
         file_type = re.findall(r'\.(\w+|\d+)$', request.data['file_name'])[0]
-
-        with open(f'{uuid.uuid4()}.{file_type}', "wb") as file:
+        file_id = uuid.uuid4()
+        user = CloudUser.objects.all().get(id=user_id)
+        CloudUserFiles.objects.create(
+            file_uid = str(file_id),
+            file_name = f'{file_name}{file_id}',
+            file_data = file_data,
+            file_type = request.data['file_type'],
+            file_comment = request.data['file_comment'],
+            file_path = f'{user.store_path}/{file_name}{file_id}.{file_type}',
+            user = CloudUser(id=request.data['user']),
+        ).save()
+        current_file = CloudUserFiles.objects.get(file_uid=file_id)
+        print(file_id)
+        print(f'{user.store_path}/{file_name}{file_id}.{file_type}')
+        with open(f'{user.store_path}/{file_name}{file_id}.{file_type}', "wb") as file:
             file.write(base64.b64decode(file_data))
+
         return super().create(request, *args, **kwargs)
 
 
@@ -89,3 +124,5 @@ class UserFilesViewSet(ModelViewSet):
     #     CloudUserFiles.objects.filter(id=file_id).delete()
         
     #     return Response(status=status.HTTP_204_NO_CONTENT)
+
+
