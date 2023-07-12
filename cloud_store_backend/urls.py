@@ -18,12 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework import routers
-from users.views import singup,login, test_token, get_users, UserFilesViewSet, get_file
+from users.views import singup,login, test_token, get_users, download_file_by_id, get_user_files, create_user_file
 from .views import index
 
 
-router = routers.DefaultRouter()
-router.register('api/users/user_files', UserFilesViewSet)
+# router = routers.DefaultRouter()
+# router.register('api/users/user_files', UserFilesViewSet)
 
 urlpatterns = [
     # path('', index),
@@ -31,7 +31,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('singup/', singup),
     path('login/', login),
+    path('api/user/files/', get_user_files),
     path('api/users/', get_users),
     path('test_token/', test_token),
-    path('<file_uid>/', get_file)
-] + router.urls
+    path('user/file/<file_uid>/', download_file_by_id),
+    path('api/users/user_files/', create_user_file),
+]

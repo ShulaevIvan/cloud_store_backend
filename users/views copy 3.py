@@ -2,7 +2,6 @@ from django.shortcuts import render, HttpResponse
 from .models import CloudUser
 from django.shortcuts import get_object_or_404
 from django.utils.encoding import smart_str
-from pprint import pprint
 import os
 import base64
 import re
@@ -90,50 +89,49 @@ def get_user_files(request):
     user_id = request.data['user']
     current_user_files = CloudUserFiles.objects.all().filter(user=user_id).values()
     list_result = [entry for entry in current_user_files]
+    print(list_result)
+    return Response({'status': 'ok'})
 
-    return Response(list_result)
 
-@api_view(['GET','POST', 'DELETE'])
-def create_user_file(request):
 
-    if request.method == 'DELETE':
-        file_id = request.data['id']
-        user_id = request.data['user']
-        server_file_path = CloudUserFiles.objects.all().filter(file_uid=file_id, user=user_id).values()
-        os.remove(server_file_path[0]['file_path'])
-        CloudUserFiles.objects.get(file_uid = file_id, user = user_id).delete()
-        user_files = CloudUserFiles.objects.all().filter(user=user_id).values()
+class UserFilesViewSet(ModelViewSet):
+    queryset = CloudUserFiles.objects.all()
+    serializer_class = CloudUserFilesSerializer
+    filterset_fields = ['user']
 
-        return Response(user_files)
-
-    elif request.method == 'POST':
+    def create(self, request, *args, **kwargs):
+        # print(request.data['file_name'])
+        # print(request.data['user'])
         user_id = request.data['user']
         file_name = re.sub(r'\.(\w+|\d+)$', '', request.data['file_name'])
         file_data = request.data['file_data']
         file_type = re.findall(r'\.(\w+|\d+)$', request.data['file_name'])[0]
         file_id = uuid.uuid4()
         user = CloudUser.objects.all().get(id=user_id)
-        if file_id != '':
-            CloudUserFiles.objects.create(
-                file_uid = file_id,
-                file_name = f'{file_name}.{file_type}',
-                file_type = request.data['file_type'],
-                file_url = f'http://127.0.0.1:8000/user/file/{file_id}/',
-                file_comment = request.data['file_comment'],
-                file_path = f'{user.store_path}/{file_name}{file_id}.{file_type}',
-                user = CloudUser(id=request.data['user']),
-            ).save()
+        CloudUserFiles.objects.create(
+            file_uid = str(file_id),
+            file_name = f'{file_name}{file_id}',
+            file_data = file_data,
+            file_type = request.data['file_type'],
+            file_comment = request.data['file_comment'],
+            file_path = f'{user.store_path}/{file_name}{file_id}.{file_type}',
+            user = CloudUser(id=request.data['user']),
+        ).save()
+        current_file = CloudUserFiles.objects.get(file_uid=file_id)
+        print(file_id)
+        print(f'{user.store_path}/{file_name}{file_id}.{file_type}')
+        with open(f'{user.store_path}/{file_name}{file_id}.{file_type}', "wb") as file:
+            file.write(base64.b64decode(file_data))
 
-            with open(f'{user.store_path}/{file_name}{file_id}.{file_type}', "wb") as file:
-                file.write(base64.b64decode(file_data))
-            data = CloudUserFiles.objects.all().filter(user=user_id).values()[0]
+        return super().create(request, *args, **kwargs)
 
-            return Response(data)
+
+    # def delete(self, request):
+    #     user = request.data['user']
+    #     file_id = request.data['id']
+    #     print(request)
+    #     CloudUserFiles.objects.filter(id=file_id).delete()
         
-    elif request.method == 'GET':
-        file_id = request.GET.get('id')
-        file_obj = CloudUserFiles.objects.all().filter(file_uid=file_id).values()
-        if file_obj[0]:
-            return Response(file_obj[0])
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
 
 
