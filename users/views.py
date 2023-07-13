@@ -1,14 +1,11 @@
 from django.shortcuts import render, HttpResponse
 from .models import CloudUser
 from django.shortcuts import get_object_or_404
-from django.utils.encoding import smart_str
 from pprint import pprint
 import os
 import base64
 import re
 import uuid
-import pathlib
-import mimetypes
 
 
 from rest_framework.decorators import authentication_classes, permission_classes
@@ -107,28 +104,51 @@ def create_user_file(request):
         return Response(user_files)
 
     elif request.method == 'POST':
-        user_id = request.data['user']
-        file_name = re.sub(r'\.(\w+|\d+)$', '', request.data['file_name'])
-        file_data = request.data['file_data']
-        file_type = re.findall(r'\.(\w+|\d+)$', request.data['file_name'])[0]
-        file_id = uuid.uuid4()
-        user = CloudUser.objects.all().get(id=user_id)
-        if file_id != '':
-            CloudUserFiles.objects.create(
-                file_uid = file_id,
-                file_name = f'{file_name}.{file_type}',
-                file_type = request.data['file_type'],
-                file_url = f'http://127.0.0.1:8000/user/file/{file_id}/',
-                file_comment = request.data['file_comment'],
-                file_path = f'{user.store_path}/{file_name}{file_id}.{file_type}',
-                user = CloudUser(id=request.data['user']),
-            ).save()
+        if request.data.get('rename_id'):
+            user_id = request.data['user']
+            file_id = request.data['rename_id']
+            file_name = request.data['file_name']
+            file_comment = request.data['file_comment']
+            user = CloudUser.objects.all().get(id=user_id)
+            target_file = CloudUserFiles.objects.get(user=user_id, file_uid = file_id)
+            old_file_path = target_file.file_path
+            
+            file_type = re.findall(r'\.(\w+|\d+)$', target_file.file_path)[0]
+            target_file.file_name = file_name
+            target_file.file_comment = file_comment
+            target_file.save()
 
-            with open(f'{user.store_path}/{file_name}{file_id}.{file_type}', "wb") as file:
-                file.write(base64.b64decode(file_data))
-            data = CloudUserFiles.objects.all().filter(user=user_id).values()[0]
+            new_file_path = f'{user.store_path}/{target_file.file_name}{target_file.file_uid}.{file_type}'
+            new_file = CloudUserFiles.objects.get(user=user_id, file_uid = file_id)
+            new_file.file_path = new_file_path
+            new_file.save()
+            response = CloudUserFiles.objects.all().filter(file_uid = file_id, user=user_id).values()[0]
 
-            return Response(data)
+            os.rename(old_file_path, new_file_path)
+            return Response(response)
+        else:
+            user_id = request.data['user']
+            file_name = re.sub(r'\.(\w+|\d+)$', '', request.data['file_name'])
+            file_data = request.data['file_data']
+            file_type = re.findall(r'\.(\w+|\d+)$', request.data['file_name'])[0]
+            file_id = uuid.uuid4()
+            user = CloudUser.objects.all().get(id=user_id)
+
+            if file_id != '':
+                CloudUserFiles.objects.create(
+                    file_uid = file_id,
+                    file_name = f'{file_name}.{file_type}',
+                    file_type = request.data['file_type'],
+                    file_url = f'http://127.0.0.1:8000/user/file/{file_id}/',
+                    file_comment = request.data['file_comment'],
+                    file_path = f'{user.store_path}/{file_name}{file_id}.{file_type}',
+                    user = CloudUser(id=request.data['user']),
+                ).save()
+
+                with open(f'{user.store_path}/{file_name}{file_id}.{file_type}', "wb") as file:
+                    file.write(base64.b64decode(file_data))
+                data = CloudUserFiles.objects.all().filter(user=user_id, file_uid = file_id).values()[0]
+                return Response(data)
         
     elif request.method == 'GET':
         file_id = request.GET.get('id')
