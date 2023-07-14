@@ -15,6 +15,6 @@ class CloudUserFiles(models.Model):
     file_url = models.TextField(blank=True)
     file_path = models.TextField(blank=True)
     file_created_time = models.DateTimeField(auto_now_add=True)
-    file_last_download_time = models.DateField(null=True)
+    file_last_download_time = models.DateTimeField(null=True)
     user = models.ForeignKey(CloudUser, on_delete=models.CASCADE, related_name='userFiles')
 

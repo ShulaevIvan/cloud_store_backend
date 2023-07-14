@@ -6,6 +6,7 @@ import os
 import base64
 import re
 import uuid
+import datetime
 
 
 from rest_framework.decorators import authentication_classes, permission_classes
@@ -37,7 +38,8 @@ def login(request):
 
     return Response({ 
         'token': token.key,
-        'user': serializer.data
+        'user': serializer.data,
+        'is_admin': user.is_staff,
     })
 
 @api_view(['POST'])
@@ -73,12 +75,14 @@ def get_users(request):
 
 
 def download_file_by_id(request, file_uid):
-    target_file = CloudUserFiles.objects.get(file_uid=file_uid)
+    target_file = CloudUserFiles.objects.all().get(file_uid=file_uid)
     file_path = target_file.file_path
+    target_file.file_last_download_time = datetime.datetime.now()
+    target_file.save()
 
     with open(file_path, 'rb') as fh:
         response = HttpResponse(fh.read(), content_type=target_file.file_type)
-        response['Content-Disposition'] = 'attachment; filename=' + file_path
+        response['Content-Disposition'] = 'attachment; filename=' + target_file.file_name
         
         return response
 
