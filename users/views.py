@@ -27,6 +27,7 @@ from .models import CloudUser
 @api_view(['POST'])
 def login(request):
     user = get_object_or_404(CloudUser, username=request.data['username'])
+
     if not user.check_password(request.data['password']):
         return Response({'detail': 'Not found.',}, status=status.HTTP_404_NOT_FOUND)
     token, created = Token.objects.get_or_create(user=user)
@@ -35,6 +36,11 @@ def login(request):
         print('test')
     else:
         os.mkdir(f'users_store/{user}')
+    
+    if user.is_staff:
+        admin_user = CloudUser.objects.get(id = user.id)
+        admin_user.store_path = f'users_store/{user}'
+        admin_user.save()
 
     return Response({ 
         'token': token.key,
@@ -160,4 +166,7 @@ def create_user_file(request):
         if file_obj[0]:
             return Response(file_obj[0])
 
-
+@api_view(['GET'])
+def users_detail(reuquest):
+    users = CloudUser.objects.all()
+    return Response(users)
