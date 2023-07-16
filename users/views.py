@@ -169,4 +169,5 @@ def create_user_file(request):
 @api_view(['GET'])
 def users_detail(reuquest):
     users = CloudUser.objects.all()
+    
     return Response(users)
