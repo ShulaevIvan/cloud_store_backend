@@ -3,6 +3,7 @@ from .models import CloudUser
 from django.shortcuts import get_object_or_404
 from pprint import pprint
 import os
+import shutil
 import base64
 import re
 import uuid
@@ -77,6 +78,7 @@ def test_token(request):
 def get_users(request):
     users = CloudUser.objects.all()
     serializer = CloudUsersSerializer(users, many=True)
+
     return Response({'users': serializer.data})
 
 
@@ -197,22 +199,26 @@ def user_control(request):
     action = request.data.get('action')
     
     if request.method == 'POST' and action == 'DELETE':
-        pass
+        target_user_id = request.data.get('target_user')
+        user_object = CloudUser.objects.get(id=target_user_id)
+        user_object.delete()
+        shutil.rmtree(f'{os.getcwd()}/{user_object.store_path}/')
+
+        return Response({'status': 'ok'})
+    
     if request.method == 'POST' and action == 'TOADMIN':
         target_user_id = request.data.get('target_user')
-        userObject = CloudUser.objects.get(id = target_user_id)
-        userObject.is_staff = True
-        userObject.save()
+        user_object = CloudUser.objects.get(id = target_user_id)
+        user_object.is_staff = True
+        user_object.save()
 
         return Response({'status': 'ok'})
     
     if request.method == 'POST' and action == 'TOUSER':
         target_user_id = request.data.get('target_user')
-        userObject = CloudUser.objects.get(id = target_user_id)
-        userObject.is_staff = False
-        userObject.save()
+        user_object = CloudUser.objects.get(id = target_user_id)
+        user_object.is_staff = False
+        user_object.save()
 
         return Response({'status': 'ok'})
-
-    pass
 
