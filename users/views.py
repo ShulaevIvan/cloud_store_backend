@@ -28,7 +28,6 @@ from .models import CloudUser
 @api_view(['POST'])
 def login(request):
     user = get_object_or_404(CloudUser, username=request.data['username'])
-
     if not user.check_password(request.data['password']):
         return Response({'detail': 'Not found.',}, status=status.HTTP_404_NOT_FOUND)
     token, created = Token.objects.get_or_create(user=user)
