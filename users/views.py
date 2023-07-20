@@ -115,6 +115,7 @@ def create_user_file(request):
         return Response(user_files)
 
     elif request.method == 'POST':
+        print(request.data)
         if request.data.get('rename_id'):
             user_id = request.data['user']
             file_id = request.data['rename_id']
