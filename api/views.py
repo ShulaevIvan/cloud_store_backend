@@ -38,8 +38,9 @@ class LoginUserView(APIView):
         if user.is_staff:
             admin_user = CloudUser.objects.get(id = user.id)
             admin_user.store_path = f'users_store/{user}'
-            admin_user.save()
             authenticate(username=admin_user.username, password=admin_user.password)
+            admin_user.save()
+            
         
 
         authenticate(username = user.username, password = user.password)
@@ -74,7 +75,7 @@ class SingupUserView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class UsersView(APIView):
-    authentication_classes = [IsAdminUser, TokenAuthentication,]
+    authentication_classes = [TokenAuthentication,]
 
     def get(self, request):
         users = CloudUser.objects.all()
@@ -98,12 +99,17 @@ class GetUserFiles(APIView):
 
 class UserFileControl(APIView):
     authentication_classes = [TokenAuthentication,]
+    permission_classes = [IsAuthenticated,]
 
     def get(self, request):
         file_id = request.GET.get('id')
         file_obj = CloudUserFiles.objects.all().filter(file_uid=file_id).values()
-        if file_obj[0]:
+        user_check = CloudUser.objects.get(id=file_obj[0]['user_id'])
+
+        if file_obj[0] and user_check.is_authenticated or file_obj[0] and user_check.is_staff:
             return Response(file_obj[0], status=status.HTTP_200_OK)
+        
+        return Response(status=status.HTTP_404_NOT_FOUND)
         
     def post(self, request):
         if request.data.get('rename_id'):
@@ -161,4 +167,4 @@ class UserFileControl(APIView):
         CloudUserFiles.objects.get(file_uid = file_id, user = user_id).delete()
         user_files = CloudUserFiles.objects.all().filter(user=user_id).values()
 
-        return Response(user_files)
+        return Response(user_files, status=status.HTTP_204_NO_CONTENT)

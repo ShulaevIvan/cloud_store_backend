@@ -1,3 +1,3 @@
 ###
-http://127.0.0.1:8000/api/users/
+http://127.0.0.1:8000/api/users/files/
 Authorization: Token 10d1e72dd477d0ffa754e4ab30e268a419f9efa8
