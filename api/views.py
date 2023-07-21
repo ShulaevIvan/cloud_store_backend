@@ -1,0 +1,164 @@
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import authenticate, login
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework.authentication import TokenAuthentication
+
+from .serializers import CloudUsersSerializer
+from users.models import CloudUser, CloudUserFiles
+from users.serializers import CloudUserSerializer
+
+import os
+import shutil
+import base64
+import re
+import uuid
+import datetime
+
+# Create your views here.
+
+class LoginUserView(APIView):
+    permission_classes = [AllowAny,]
+    def post(self, request):
+        user = get_object_or_404(CloudUser, username=request.data['username'])
+        if not user.check_password(request.data['password']):
+            return Response({'detail': 'Not found',}, status=status.HTTP_404_NOT_FOUND)
+        
+        token, created = Token.objects.get_or_create(user=user)
+        serializer = CloudUserSerializer(instance=user)
+
+        if os.path.exists(f'users_store/{user}'):
+            pass
+        else:
+            os.mkdir(f'users_store/{user}')
+    
+        if user.is_staff:
+            admin_user = CloudUser.objects.get(id = user.id)
+            admin_user.store_path = f'users_store/{user}'
+            admin_user.save()
+            authenticate(username=admin_user.username, password=admin_user.password)
+        
+
+        authenticate(username = user.username, password = user.password)
+
+        return Response({ 
+            'status': status.HTTP_202_ACCEPTED,
+            'token': token.key,
+            'user': serializer.data,
+            'is_admin': user.is_staff,
+        })
+    
+class SingupUserView(APIView):
+    permission_classes = [AllowAny,]
+
+    def post(self, request):
+        serializer = CloudUserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            user = CloudUser.objects.get(username = request.data['username'])
+            user.set_password(request.data['password'])
+            user.full_name = request.data['full_name']
+            user.store_path = f'users_store/{user}'
+            user.save()
+            token = Token.objects.create(user=user)
+            os.mkdir(user.store_path)
+
+            return Response({
+                'token': token.key,
+                'user': serializer.data
+            })
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class UsersView(APIView):
+    authentication_classes = [IsAdminUser, TokenAuthentication,]
+
+    def get(self, request):
+        users = CloudUser.objects.all()
+        serializer = CloudUsersSerializer(users, many=True)
+
+        return Response({'users': serializer.data}, status=status.HTTP_200_OK)
+    
+
+class GetUserFiles(APIView):
+    authentication_classes = [TokenAuthentication,]
+
+    def post(self, request):
+        user = CloudUser.objects.get(id=request.data['user'])
+
+        if user.is_authenticated or user.is_staff:
+            user_id = request.data['user']
+            current_user_files = CloudUserFiles.objects.all().filter(user=user_id).values()
+            list_result = [entry for entry in current_user_files]
+
+            return Response(list_result, status=status.HTTP_200_OK)
+
+class UserFileControl(APIView):
+    authentication_classes = [TokenAuthentication,]
+
+    def get(self, request):
+        file_id = request.GET.get('id')
+        file_obj = CloudUserFiles.objects.all().filter(file_uid=file_id).values()
+        if file_obj[0]:
+            return Response(file_obj[0], status=status.HTTP_200_OK)
+        
+    def post(self, request):
+        if request.data.get('rename_id'):
+            user_id = request.data['user']
+            file_id = request.data['rename_id']
+            file_name = request.data['file_name']
+            file_comment = request.data['file_comment']
+            user = CloudUser.objects.all().get(id=user_id)
+            target_file = CloudUserFiles.objects.get(user=user_id, file_uid = file_id)
+            old_file_path = target_file.file_path
+            
+            file_type = re.findall(r'\.(\w+|\d+)$', target_file.file_path)[0]
+            target_file.file_name = file_name
+            target_file.file_comment = file_comment
+            target_file.save()
+
+            new_file_path = f'{user.store_path}/{target_file.file_name}{target_file.file_uid}.{file_type}'
+            new_file = CloudUserFiles.objects.get(user=user_id, file_uid = file_id)
+            new_file.file_path = new_file_path
+            new_file.save()
+            response = CloudUserFiles.objects.all().filter(file_uid = file_id, user=user_id).values()[0]
+
+            os.rename(old_file_path, new_file_path)
+            return Response(response, status=status.HTTP_201_CREATED)
+        else:
+            user_id = request.data['user']
+            file_name = re.sub(r'\.(\w+|\d+)$', '', request.data['file_name'])
+            file_data = request.data['file_data']
+            file_type = re.findall(r'\.(\w+|\d+)$', request.data['file_name'])[0]
+            file_id = uuid.uuid4()
+            user = CloudUser.objects.all().get(id=user_id)
+
+            if file_id != '':
+                CloudUserFiles.objects.create(
+                    file_uid = file_id,
+                    file_name = f'{file_name}.{file_type}',
+                    file_type = request.data['file_type'],
+                    file_url = f'http://127.0.0.1:8000/user/file/{file_id}/',
+                    file_comment = request.data['file_comment'],
+                    file_path = f'{user.store_path}/{file_name}{file_id}.{file_type}',
+                    user = CloudUser(id=request.data['user']),
+                ).save()
+
+                with open(f'{user.store_path}/{file_name}{file_id}.{file_type}', "wb") as file:
+                    file.write(base64.b64decode(file_data))
+                data = CloudUserFiles.objects.all().filter(user=user_id, file_uid = file_id).values()[0]
+
+                return Response(data, status=status.HTTP_201_CREATED)
+            
+    def delete(self, request):
+        file_id = request.data['id']
+        user_id = request.data['user']
+        server_file_path = CloudUserFiles.objects.all().filter(file_uid=file_id, user=user_id).values()
+        os.remove(server_file_path[0]['file_path'])
+        CloudUserFiles.objects.get(file_uid = file_id, user = user_id).delete()
+        user_files = CloudUserFiles.objects.all().filter(user=user_id).values()
+
+        return Response(user_files)

@@ -16,10 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic import TemplateView
-from rest_framework import routers
-from users.views import singup,login, test_token, get_users, download_file_by_id, get_user_files, create_user_file, users_detail,user_control
+from users.views import test_token, download_file_by_id, users_detail,user_control
 from .views import index
+from api.views import LoginUserView, SingupUserView, UsersView, GetUserFiles, UserFileControl
+
 
 
 # router = routers.DefaultRouter()
@@ -29,13 +29,13 @@ urlpatterns = [
     # path('', index),
     # path('manifest.json', TemplateView.as_view(template_name='manifest.json', content_type='application/json'), name='manifest.json'),
     path('admin/', admin.site.urls),
-    path('singup/', singup),
-    path('login/', login),
-    path('api/user/files/', get_user_files),
-    path('api/users/', get_users),
+    path('singup/', SingupUserView.as_view()),
+    path('login/', LoginUserView.as_view()),
+    path('api/users/', UsersView.as_view()),
+    path('api/users/files/', GetUserFiles.as_view()),
     path('api/usersdetail/', users_detail),
     path('api/user/control/', user_control),
     path('test_token/', test_token),
     path('user/file/<file_uid>/', download_file_by_id),
-    path('api/users/user_files/', create_user_file),
+    path('api/users/user_files/', UserFileControl.as_view()),
 ]
