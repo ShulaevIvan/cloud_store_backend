@@ -1,12 +1,9 @@
 from rest_framework.permissions import BasePermission
-from yaml import serialize
-
+from users.models import CloudUser, CloudUserFiles
 
 class IsOwner(BasePermission):
 
-    def has_object_permission(self, request, view, obj):
+    def has_permission(self, request, view):
         
-        if request.method == 'GET':
-            return True
-        
-        return request.user == obj.creator
+        print(request.data.get('user'))
+        return super().has_permission(request, view)

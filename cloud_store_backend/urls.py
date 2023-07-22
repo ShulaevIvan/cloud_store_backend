@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from users.views import test_token, download_file_by_id, users_detail,user_control
+from users.views import test_token, users_detail,user_control
 from .views import index
-from api.views import LoginUserView, SingupUserView, UsersView, GetUserFiles, UserFileControl
+from api.views import LoginUserView, SingupUserView, UsersView, GetUserFiles, UserFileControl,download_file_by_id
 
 
 
@@ -36,6 +36,7 @@ urlpatterns = [
     path('api/usersdetail/', users_detail),
     path('api/user/control/', user_control),
     path('test_token/', test_token),
+    # path('user/file/<file_uid>/', DownloadFile.as_view()),
     path('user/file/<file_uid>/', download_file_by_id),
     path('api/users/user_files/', UserFileControl.as_view()),
 ]

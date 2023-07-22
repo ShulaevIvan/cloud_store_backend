@@ -1,13 +1,14 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404,HttpResponse
 from django.contrib.auth import authenticate, login
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.authentication import TokenAuthentication
 
 from .serializers import CloudUsersSerializer
+from .permissions  import IsOwner
 from users.models import CloudUser, CloudUserFiles
 from users.serializers import CloudUserSerializer
 
@@ -18,7 +19,6 @@ import re
 import uuid
 import datetime
 
-# Create your views here.
 
 class LoginUserView(APIView):
     permission_classes = [AllowAny,]
@@ -101,6 +101,11 @@ class UserFileControl(APIView):
     authentication_classes = [TokenAuthentication,]
     permission_classes = [IsAuthenticated,]
 
+    # def get_permissions(self):
+    #     """Получение прав для действий."""
+        
+    #     return [IsOwner()]
+
     def get(self, request):
         file_id = request.GET.get('id')
         file_obj = CloudUserFiles.objects.all().filter(file_uid=file_id).values()
@@ -165,6 +170,18 @@ class UserFileControl(APIView):
         server_file_path = CloudUserFiles.objects.all().filter(file_uid=file_id, user=user_id).values()
         os.remove(server_file_path[0]['file_path'])
         CloudUserFiles.objects.get(file_uid = file_id, user = user_id).delete()
-        user_files = CloudUserFiles.objects.all().filter(user=user_id).values()
 
-        return Response(user_files, status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+
+def download_file_by_id(request, file_uid):
+    target_file = CloudUserFiles.objects.all().get(file_uid=file_uid)
+    file_path = target_file.file_path
+    target_file.file_last_download_time = datetime.datetime.now()
+    target_file.save()
+
+    with open(file_path, 'rb') as fh:
+        response = HttpResponse(fh.read(), content_type=target_file.file_type)
+        response['Content-Disposition'] = 'attachment; filename=' + target_file.file_name
+        
+        return response
