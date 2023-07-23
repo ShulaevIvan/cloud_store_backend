@@ -193,32 +193,32 @@ def users_detail(request):
         
     return Response({'users': response_arr})
 
-@api_view(['POST'])
-def user_control(request):
-    action = request.data.get('action')
+# @api_view(['POST'])
+# def user_control(request):
+#     action = request.data.get('action')
     
-    if request.method == 'POST' and action == 'DELETE':
-        target_user_id = request.data.get('target_user')
-        user_object = CloudUser.objects.get(id=target_user_id)
-        remove_username = user_object.username
-        user_object.delete()
+#     if request.method == 'POST' and action == 'DELETE':
+#         target_user_id = request.data.get('target_user')
+#         user_object = CloudUser.objects.get(id=target_user_id)
+#         remove_username = user_object.username
+#         user_object.delete()
         
-        shutil.rmtree(f'{os.getcwd()}/{user_object.store_path}/')
-        return Response({'status': 'ok', 'username': remove_username, 'user_id': target_user_id})
+#         shutil.rmtree(f'{os.getcwd()}/{user_object.store_path}/')
+#         return Response({'status': 'ok', 'username': remove_username, 'user_id': target_user_id})
     
-    if request.method == 'POST' and action == 'TOADMIN':
-        target_user_id = request.data.get('target_user')
-        user_object = CloudUser.objects.get(id = target_user_id)
-        user_object.is_staff = True
-        user_object.save()
+#     if request.method == 'POST' and action == 'TOADMIN':
+#         target_user_id = request.data.get('target_user')
+#         user_object = CloudUser.objects.get(id = target_user_id)
+#         user_object.is_staff = True
+#         user_object.save()
 
-        return Response({'status': 'ok'})
+#         return Response({'status': 'ok'})
     
-    if request.method == 'POST' and action == 'TOUSER':
-        target_user_id = request.data.get('target_user')
-        user_object = CloudUser.objects.get(id = target_user_id)
-        user_object.is_staff = False
-        user_object.save()
+#     if request.method == 'POST' and action == 'TOUSER':
+#         target_user_id = request.data.get('target_user')
+#         user_object = CloudUser.objects.get(id = target_user_id)
+#         user_object.is_staff = False
+#         user_object.save()
 
-        return Response({'status': 'ok'})
+#         return Response({'status': 'ok'})
 

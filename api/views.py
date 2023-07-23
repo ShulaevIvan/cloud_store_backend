@@ -1,10 +1,11 @@
-from django.shortcuts import get_object_or_404,HttpResponse
-from django.contrib.auth import authenticate, login
+from django.shortcuts import get_object_or_404,HttpResponse, HttpResponseRedirect
+from django.contrib.sessions.models import Session
+from django.contrib.auth import authenticate, login, logout
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny,IsAdminUser
 from rest_framework.authentication import TokenAuthentication
 
 from .serializers import CloudUsersSerializer
@@ -23,6 +24,7 @@ import datetime
 class LoginUserView(APIView):
     permission_classes = [AllowAny,]
     def post(self, request):
+        print(request.session)
         user = get_object_or_404(CloudUser, username=request.data['username'])
         if not user.check_password(request.data['password']):
             return Response({'detail': 'Not found',}, status=status.HTTP_404_NOT_FOUND)
@@ -69,7 +71,8 @@ class SingupUserView(APIView):
 
             return Response({
                 'token': token.key,
-                'user': serializer.data
+                'user': serializer.data,
+                'is_staff': user.is_staff,
             })
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -100,11 +103,6 @@ class GetUserFiles(APIView):
 class UserFileControl(APIView):
     authentication_classes = [TokenAuthentication,]
     permission_classes = [IsAuthenticated,]
-
-    # def get_permissions(self):
-    #     """Получение прав для действий."""
-        
-    #     return [IsOwner()]
 
     def get(self, request):
         file_id = request.GET.get('id')
@@ -173,6 +171,45 @@ class UserFileControl(APIView):
 
         return Response(status=status.HTTP_204_NO_CONTENT)
     
+class UsersControl(APIView):
+    authentication_classes = [TokenAuthentication,]
+    permission_classes = [IsAdminUser,]
+
+    def post(self, request):
+        action = request.data.get('action')
+    
+        if request.method == 'POST' and action == 'DELETE':
+            target_user_id = request.data.get('target_user')
+            user_object = CloudUser.objects.get(id=target_user_id)
+            remove_username = user_object.username
+            user_object.delete()
+        
+            shutil.rmtree(f'{os.getcwd()}/{user_object.store_path}/')
+            return Response({'status': 'ok', 'username': remove_username, 'user_id': target_user_id}, status=status.HTTP_204_NO_CONTENT)
+    
+        if request.method == 'POST' and action == 'TOADMIN':
+            target_user_id = request.data.get('target_user')
+            user_object = CloudUser.objects.get(id = target_user_id)
+            user_object.is_staff = True
+            user_object.save()
+
+            return Response({'status': 'ok'}, status=status.HTTP_202_ACCEPTED)
+    
+        if request.method == 'POST' and action == 'TOUSER':
+            target_user_id = request.data.get('target_user')
+            user_object = CloudUser.objects.get(id = target_user_id)
+            user_object.is_staff = False
+            user_object.save()
+
+            return Response({'status': 'ok'}, status=status.HTTP_202_ACCEPTED)
+        
+        if request.method == 'POST' and action == 'LOGOUT':
+            target_user_id = request.data.get('target_user')
+            t = Token.objects.get(user=target_user_id)
+            t.delete()
+           
+            return Response({'status': 'ok'}, status=status.HTTP_202_ACCEPTED)
+    
 
 def download_file_by_id(request, file_uid):
     target_file = CloudUserFiles.objects.all().get(file_uid=file_uid)
@@ -185,3 +222,4 @@ def download_file_by_id(request, file_uid):
         response['Content-Disposition'] = 'attachment; filename=' + target_file.file_name
         
         return response
+    
