@@ -1,5 +1,4 @@
-from django.shortcuts import get_object_or_404,HttpResponse, HttpResponseRedirect
-from django.contrib.sessions.models import Session
+from django.shortcuts import get_object_or_404,HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from rest_framework import status
 from rest_framework.views import APIView
@@ -8,10 +7,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated, AllowAny,IsAdminUser
 from rest_framework.authentication import TokenAuthentication
 
-from .serializers import CloudUsersSerializer
-from .permissions  import IsOwner
 from users.models import CloudUser, CloudUserFiles
-from users.serializers import CloudUserSerializer
+from .serializers import CloudUsersSerializer, SingUpLoginSerializer, UserFileControlSerializer
 
 import os
 import shutil
@@ -24,13 +21,12 @@ import datetime
 class LoginUserView(APIView):
     permission_classes = [AllowAny,]
     def post(self, request):
-        print(request.session)
         user = get_object_or_404(CloudUser, username=request.data['username'])
         if not user.check_password(request.data['password']):
             return Response({'detail': 'Not found',}, status=status.HTTP_404_NOT_FOUND)
         
         token, created = Token.objects.get_or_create(user=user)
-        serializer = CloudUserSerializer(instance=user)
+        serializer = SingUpLoginSerializer(instance=user)
 
         if os.path.exists(f'users_store/{user}'):
             pass
@@ -43,8 +39,6 @@ class LoginUserView(APIView):
             authenticate(username=admin_user.username, password=admin_user.password)
             admin_user.save()
             
-        
-
         authenticate(username = user.username, password = user.password)
 
         return Response({ 
@@ -54,11 +48,20 @@ class LoginUserView(APIView):
             'is_admin': user.is_staff,
         })
     
+class LogoutUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        target_user_id = request.data['user']
+        token = Token.objects.get(user=target_user_id).delete()
+
+        return Response({'status':'ok'}, status=status.HTTP_200_OK)
+    
 class SingupUserView(APIView):
     permission_classes = [AllowAny,]
 
     def post(self, request):
-        serializer = CloudUserSerializer(data=request.data)
+        serializer = SingUpLoginSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             user = CloudUser.objects.get(username = request.data['username'])
@@ -66,11 +69,9 @@ class SingupUserView(APIView):
             user.full_name = request.data['full_name']
             user.store_path = f'users_store/{user}'
             user.save()
-            token = Token.objects.create(user=user)
             os.mkdir(user.store_path)
 
             return Response({
-                'token': token.key,
                 'user': serializer.data,
                 'is_staff': user.is_staff,
             })
@@ -79,6 +80,7 @@ class SingupUserView(APIView):
     
 class UsersView(APIView):
     authentication_classes = [TokenAuthentication,]
+    permission_classes = [IsAuthenticated, IsAdminUser,]
 
     def get(self, request):
         users = CloudUser.objects.all()
@@ -89,16 +91,18 @@ class UsersView(APIView):
 
 class GetUserFiles(APIView):
     authentication_classes = [TokenAuthentication,]
+    permission_classes = [IsAuthenticated,]
 
     def post(self, request):
         user = CloudUser.objects.get(id=request.data['user'])
 
-        if user.is_authenticated or user.is_staff:
-            user_id = request.data['user']
-            current_user_files = CloudUserFiles.objects.all().filter(user=user_id).values()
-            list_result = [entry for entry in current_user_files]
+        if user.is_authenticated and user.id == request.data['user'] or user.is_staff:
+            current_user_files = CloudUserFiles.objects.all().filter(user=user.id).values()
+            list_result = [item for item in current_user_files]
 
             return Response(list_result, status=status.HTTP_200_OK)
+        
+        return Response({'status': 'not found'}, status=status.HTTP_404_NOT_FOUND)
 
 class UserFileControl(APIView):
     authentication_classes = [TokenAuthentication,]
@@ -115,7 +119,9 @@ class UserFileControl(APIView):
         return Response(status=status.HTTP_404_NOT_FOUND)
         
     def post(self, request):
-        if request.data.get('rename_id'):
+        serializer = UserFileControlSerializer(data=request.data)
+      
+        if request.data.get('rename_id') and request.data.get('user') and request.data.get('file_name'):
             user_id = request.data['user']
             file_id = request.data['rename_id']
             file_name = request.data['file_name']
@@ -136,8 +142,10 @@ class UserFileControl(APIView):
             response = CloudUserFiles.objects.all().filter(file_uid = file_id, user=user_id).values()[0]
 
             os.rename(old_file_path, new_file_path)
+
             return Response(response, status=status.HTTP_201_CREATED)
-        else:
+        
+        elif serializer.is_valid():
             user_id = request.data['user']
             file_name = re.sub(r'\.(\w+|\d+)$', '', request.data['file_name'])
             file_data = request.data['file_data']
@@ -152,8 +160,8 @@ class UserFileControl(APIView):
                     file_type = request.data['file_type'],
                     file_url = f'http://127.0.0.1:8000/user/file/{file_id}/',
                     file_comment = request.data['file_comment'],
-                    file_path = f'{user.store_path}/{file_name}{file_id}.{file_type}',
                     user = CloudUser(id=request.data['user']),
+                    file_path = f'{user.store_path}/{file_name}{file_id}.{file_type}',
                 ).save()
 
                 with open(f'{user.store_path}/{file_name}{file_id}.{file_type}', "wb") as file:
@@ -162,6 +170,8 @@ class UserFileControl(APIView):
 
                 return Response(data, status=status.HTTP_201_CREATED)
             
+        return Response({'status': 'err'}, status=status.HTTP_404_NOT_FOUND)
+    
     def delete(self, request):
         file_id = request.data['id']
         user_id = request.data['user']
@@ -185,6 +195,7 @@ class UsersControl(APIView):
             user_object.delete()
         
             shutil.rmtree(f'{os.getcwd()}/{user_object.store_path}/')
+
             return Response({'status': 'ok', 'username': remove_username, 'user_id': target_user_id}, status=status.HTTP_204_NO_CONTENT)
     
         if request.method == 'POST' and action == 'TOADMIN':
@@ -205,10 +216,39 @@ class UsersControl(APIView):
         
         if request.method == 'POST' and action == 'LOGOUT':
             target_user_id = request.data.get('target_user')
-            t = Token.objects.get(user=target_user_id)
-            t.delete()
-           
+            token  = Token.objects.get(user=target_user_id).delete()
+
             return Response({'status': 'ok'}, status=status.HTTP_202_ACCEPTED)
+        
+        return Response({'status': 'err'}, status=status.HTTP_404_NOT_FOUND)
+    
+class UsersDetail(APIView):
+    authentication_classes = [TokenAuthentication,]
+    permission_classes = [IsAdminUser,]
+
+    def get(self, request):
+        users_data = CloudUser.objects.all()
+        response_arr = []
+
+        for user in users_data.values():
+            files_size = 0
+            files_count = 0
+            result_obj = {}
+
+            for file in os.scandir(f'{os.getcwd()}/{user["store_path"]}/'):
+                files_count += 1
+                files_size += os.stat(file).st_size
+
+            result_obj['id'] = user['id']
+            result_obj['username'] = user['username']
+            result_obj['is_staff'] = user['is_staff']
+            result_obj['email'] = user['email']
+            result_obj['files_count'] = files_count
+            result_obj['files_size'] = files_size
+
+            response_arr.append(result_obj)
+        
+        return Response({'users': response_arr}, status=status.HTTP_200_OK)
     
 
 def download_file_by_id(request, file_uid):
