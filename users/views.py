@@ -26,29 +26,3 @@ def test_token(request):
 
 
 
-# @api_view(['GET'])
-# def users_detail(request):
-#     users_data = CloudUser.objects.all()
-#     response_arr = []
-
-#     for user in users_data.values():
-#         files_size = 0
-#         files_count = 0
-#         result_obj = {}
-
-#         for file in os.scandir(f'{os.getcwd()}/{user["store_path"]}/'):
-#             files_count += 1
-#             files_size += os.stat(file).st_size
-
-#         result_obj['id'] = user['id']
-#         result_obj['username'] = user['username']
-#         result_obj['is_staff'] = user['is_staff']
-#         result_obj['email'] = user['email']
-#         result_obj['files_count'] = files_count
-#         result_obj['files_size'] = files_size
-
-#         response_arr.append(result_obj)
-        
-#     return Response({'users': response_arr})
-
-

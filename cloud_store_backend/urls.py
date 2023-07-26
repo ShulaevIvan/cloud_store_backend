@@ -15,19 +15,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from users.views import test_token
 from .views import index
 from api.views import LoginUserView, LogoutUserView, SingupUserView, UsersView, GetUserFiles, UserFileControl, UsersControl, UsersDetail, download_file_by_id
 
 
-
-# router = routers.DefaultRouter()
-# router.register('api/users/user_files', UserFilesViewSet)
-
 urlpatterns = [
-    # path('', index),
-    # path('manifest.json', TemplateView.as_view(template_name='manifest.json', content_type='application/json'), name='manifest.json'),
     path('admin/', admin.site.urls),
     path('singup/', SingupUserView.as_view()),
     path('login/', LoginUserView.as_view()),
@@ -36,8 +30,7 @@ urlpatterns = [
     path('api/users/files/', GetUserFiles.as_view()),
     path('api/usersdetail/', UsersDetail.as_view()),
     path('api/user/control/', UsersControl.as_view()),
-    path('test_token/', test_token),
-    # path('user/file/<file_uid>/', DownloadFile.as_view()),
-    path('user/file/<file_uid>/', download_file_by_id),
     path('api/users/user_files/', UserFileControl.as_view()),
+    path('test_token/', test_token),
+    path('user/file/<file_uid>/', download_file_by_id),
 ]

@@ -220,16 +220,6 @@ class UsersControl(APIView):
         try:
             action = request.data.get('action')
     
-            if request.method == 'POST' and action == 'DELETE':
-                target_user_id = request.data.get('target_user')
-                user_object = CloudUser.objects.get(id=target_user_id)
-                remove_username = user_object.username
-                user_object.delete()
-        
-                shutil.rmtree(f'{os.getcwd()}/{user_object.store_path}/')
-
-                return Response({'status': 'ok', 'username': remove_username, 'user_id': target_user_id}, status=status.HTTP_204_NO_CONTENT)
-    
             if request.method == 'POST' and action == 'TOADMIN':
                 target_user_id = request.data.get('target_user')
                 user_object = CloudUser.objects.get(id = target_user_id)
@@ -256,6 +246,19 @@ class UsersControl(APIView):
             return Response({'status': 'err'}, status=status.HTTP_404_NOT_FOUND)
         except:
             return Response({'status': 'err'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    def delete(self, request):
+        action = request.data.get('action')
+        
+        if request.method == 'DELETE' and action == 'DELETE':
+                target_user_id = request.data.get('target_user')
+                user_object = CloudUser.objects.get(id=target_user_id)
+                remove_username = user_object.username
+                user_object.delete()
+        
+                shutil.rmtree(f'{os.getcwd()}/{user_object.store_path}/')
+
+                return Response({'status': 'ok', 'username': remove_username, 'user_id': target_user_id}, status=status.HTTP_204_NO_CONTENT)
     
 class UsersDetail(APIView):
     authentication_classes = [TokenAuthentication,]
