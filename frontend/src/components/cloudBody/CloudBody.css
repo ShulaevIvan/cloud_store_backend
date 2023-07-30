@@ -1,0 +1,127 @@
+.cloud-body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.cloud-body-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.cloud-body-controls-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.cloud-body-title-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.cloud-body-files-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+}
+.cloud-files-item-wrap{
+    display: flex;
+    width: 17%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    cursor: pointer;
+}
+.cloud-item-img img {
+    max-width: 150px;
+}
+.cloud-item-filename {
+    margin-bottom: 10px;
+    text-transform: capitalize;
+}
+.cloud-item-comment, .cloud-item-last-download, .cloud-item-date-load, .cloud-item-file-type {
+    margin-bottom: 5px;
+}
+.cloud-item-file-type {
+    margin-top: 10px;
+    font-weight: bold;
+    color: purple;
+}
+.cloud-item-date-load, .cloud-item-last-download {
+    font-size: 14px;
+    font-style: italic;
+    text-transform: lowercase;
+}
+.cloud-item-controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    visibility: visible;
+}
+.cloud-item-controls-hidden {
+    visibility: hidden;
+}
+.cloud-item-delete, 
+.cloud-item-rename-btn, 
+.cloud-item-download-btn,
+.cloud-item-share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    margin-right: 2px;
+    color: #000;
+}
+.cloud-item-delete-btn::before {
+    display: flex;
+    content: '\2716';
+    font-size: 24px;
+    align-items: center;
+}
+.cloud-item-rename-btn::before {
+    display: flex;
+    content: '\1F589';
+    font-size: 16px;
+    align-items: center;
+    margin-top: 5px;
+}
+.cloud-item-download-btn::before {
+    display: flex;
+    margin-top: 5px;
+    content: '\1F807';
+    font-size: 25px;
+    align-items: center;
+}
+.cloud-item-share-btn::before {
+    display: flex;
+    content: '\27A5';
+    font-size: 30px;
+    align-items: center;
+}
+.edit-input-wrap {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+}
+.edit-inpit-ok-btn, .edit-inpit-cancel-btn {
+    display: flex;
+    margin-right: 5px;
+}
+.edit-wrap {
+    display: flex;
+    flex-direction: column;
+}
+.edit-name-input-wrap, .edit-comment-input-wrap {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}

@@ -1,12 +1,15 @@
 import React from "react";
 import { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { saveUserData } from "../../redux/slices/userSlice";
+import { useNavigate } from 'react-router-dom';
 
 
-const RegisterForm = () => {
+const RegisterForm = (props) => {
     const initialState = {
         data: undefined,
+        errorMessage: false,
         allInputsValid: undefined,
-
         loginInput: {
             loginRef: useRef(null),
             error: false,
@@ -67,11 +70,14 @@ const RegisterForm = () => {
         },
     };
     const [formState, setFormState] = useState(initialState);
-    
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const registerHandler = () => {
 
         setFormState(prevState => ({
             ...prevState,
+            errorMessage: prevState.errorMessage = false,
             loginInput: prevState.loginInput = {
                 ...prevState.loginInput,
                 error: prevState.error = prevState.loginInput.validate()
@@ -112,26 +118,50 @@ const RegisterForm = () => {
     }
 
     useEffect(()=> {
-        if (formState.allInputsValid) {
+        if (formState.allInputsValid && !formState.errorMessage) {
             const data = {
                 username: formState.loginInput.loginRef.current.value,
                 full_name: formState.fullNameInput.fullNameRef.current.value,
                 password: formState.passwordInput.passwordRef.current.value,
                 email: formState.emailInput.emailRef.current.value
             }
-            console.log(data)
             const fetchFunc = async () => {
-                await fetch('http://localhost:8000/singup/', {
+                await fetch(`${process.env.REACT_APP_BACKEND_URL}/singup/`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(data)
                 })
+                .then((response) => response.json())
+                .then((data) => {
+                    const checkUser = Object.keys(data).find(key => key === 'user');
+
+                    if (!checkUser) {
+                        setFormState(prevState => ({
+                            ...prevState,
+                            allInputsValid: prevState.allInputsValid = false,
+                            errorMessage: prevState.errorMessage = data
+                        }))
+                    }
+                    if (data.user && !props.adminRegister) {
+                        dispatch(saveUserData(data));
+                        // localStorage.setItem('userData', JSON.stringify(data))
+                        navigate('/');
+                        return;
+                    }
+                    if (data.user && props.adminRegister) {
+                        props.setAdminPanelState(prevState => ({
+                            ...prevState,
+                            activeRegister: prevState.activeRegister = false,
+                        }));
+                    }
+                    
+                });
             }
-            fetchFunc()
+            fetchFunc();
         }
-    }, [formState.allInputsValid])
+    }, [formState])
 
     return (
         <React.Fragment>
@@ -175,8 +205,12 @@ const RegisterForm = () => {
                 </form>
                 <div className="register-btn-wrap">
                     <button onClick={registerHandler}>Регистрация</button>
-                    {/* <button onClick={registerHandler} disabled = {formState.allInputsValud ? false : true}>Регистрация</button> */}
                 </div>
+            </div>
+            <div className="form-register-status">{
+                formState.errorMessage ? 
+                    `${formState.errorMessage.username ? formState.errorMessage.username : ''} 
+                        ${formState.errorMessage.email ? formState.errorMessage.email : ''}` : null}
             </div>
             
         </React.Fragment>

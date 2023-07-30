@@ -1,0 +1,95 @@
+.admin-panel-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.admin-other-users-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.admin-other-users-item-wrap {
+    display: flex;
+    flex-direction: column;
+    max-width: 33%;
+    border: 1px solid;
+    padding: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.admin-other-users-item-name, 
+.admin-other-users-item-email,
+.admin-other-users-item-access-level,
+.admin-other-users-item-files-count,
+.admin-other-users-item-memory-usage {
+    display: flex;
+    width: 100%;
+    margin-bottom: 5px;
+}
+.admin-other-users-item-control-wrap {
+    display: flex;
+    margin-top: 20px;
+}
+.admin-panel-title {
+    margin-bottom: 20px;
+}
+.admin-other-users-item-controls-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    justify-content: flex-end;
+}
+.admin-other-users-item-controls-remove-btn-wrap,
+.admin-other-users-item-controls-addadmin-btn-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-right: 5px;
+}
+.admin-other-users-item-controls-addadmin-btn-wrap .admin-users-logout-admin-btn, 
+.admin-other-users-item-controls-addadmin-btn-wrap.admin-users-remove-btn {
+    display: flex;
+    width: 20px;
+    align-items: center;
+    margin-right: 5px;
+}
+.admin-users-logout-admin-deactive-btn::before {
+    content: '\1F6C7';
+    font-size: 18px;
+    min-width: 20px;
+    cursor: pointer;
+    color: gray;
+}
+.admin-users-remove-btn::before {
+    content: '\2716';
+    min-width: 20px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 5px;
+}
+.admin-users-active-admin-btn::before {
+    content: '♛';
+    font-size: 20px;
+    min-width: 20px;
+    cursor: pointer;
+    color: gray;
+}
+.admin-users-deactive-admin-btn::before {
+    content: '♛';
+    font-size: 20px;
+    min-width: 20px;
+    cursor: pointer;
+    color: black;
+}
+.admin-users-logout-admin-btn::before {
+    content: '\1F6C7';
+    font-size: 18px;
+    min-width: 20px;
+    cursor: pointer;
+    color: black;
+}

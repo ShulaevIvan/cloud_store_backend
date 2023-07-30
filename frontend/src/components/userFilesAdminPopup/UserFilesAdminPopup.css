@@ -1,0 +1,97 @@
+.admin-user-files-panel-popup-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: absolute;
+    background-color: gray;
+    width: 90%;
+    z-index: 10;
+    min-height: 200px;
+}
+
+.admin-user-files-popup-close::before {
+    content: '\2716';
+    position: relative;
+    left: 95%;
+    top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+.admin-user-files-panel-body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+    padding: 20px;
+}
+.admin-user-files-item {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    max-width: 200px;
+    border: 1px solid;
+    padding: 10px;
+    min-height: 150px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.admin-user-files-control-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.admin-user-files-control-item-delete-btn,
+.admin-user-files-control-item-rename-btn,
+.admin-user-files-control-item-download-btn,
+.admin-user-files-control-item-share-btn {
+    display: flex;
+    margin-right: 5px;
+    text-decoration: none;
+}
+
+.admin-user-files-control-item-delete-btn::before {
+    display: flex;
+    content: '\2716';
+    font-size: 24px;
+    align-items: center;
+    cursor: pointer;
+}
+.admin-user-files-control-item-rename-btn::before {
+    display: flex;
+    content: '\1F589';
+    font-size: 16px;
+    align-items: center;
+    margin-top: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.admin-user-files-control-item-download-btn::before {
+    display: flex;
+    margin-top: 5px;
+    content: '\1F807';
+    font-size: 25px;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 5px;
+    color:black;
+    text-decoration: none;
+}
+.admin-user-files-control-item-share-btn::before {
+    display: flex;
+    content: '\27A5';
+    font-size: 30px;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.file-info-wrap p {
+    overflow: hidden;
+}
+.rename-input-wrap input {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.rename-input-ok-btn, .rename-input-cancel-btn {
+    margin-right: 2px;
+}

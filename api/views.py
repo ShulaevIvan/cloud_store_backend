@@ -24,7 +24,6 @@ class LoginUserView(APIView):
     permission_classes = [AllowAny,]
     def post(self, request):
         try:
-            # logger.error(f'login failed USERNAME {request.data["username"]}')
             user = get_object_or_404(CloudUser, username=request.data['username'])
             if not user.check_password(request.data['password']):
                 return Response({'detail': 'Not found',}, status=status.HTTP_404_NOT_FOUND)
@@ -313,3 +312,8 @@ def download_file_by_id(request, file_uid):
     except:
         return  Response({'status': 'err'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
+# @authentication_classes([TokenAuthentication])
+# @permission_classes([IsAuthenticated])
+# @api_view(['GET'])
+# def test_token(request):
+#     return Response('passed {}'.format(request.user.email))

@@ -1,3 +1,24 @@
+.App {
+  margin: 0;
+  overflow-x: hidden;
+  font-family: Verdana, sans-serif;
+  font-size: 16px;
+}
+.main-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+  box-sizing: border-box;
+  max-width: 1170px;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 0 auto;
+  position: relative;
+  flex: 1 0 auto;
+}
 .register-form-wrap {
   display: flex;
   flex-direction: column;
@@ -28,4 +49,26 @@
 }
 .register-form-input-err {
   border: 1px solid red;
+}
+.login-form-wrap {
+  padding: 40px;
+}
+.login-form {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  max-width: 800px;
+}
+.login-form label {
+  margin-right: 10px;
+}
+.login-input-wrap, .password-input-wrap, .enter-btn-wrap {
+  display: flex;
+  margin-right: 10px;
+}
+.login-err-hidden {
+  visibility: hidden;
+}
+.login-err-show {
+  visibility: show;
 }

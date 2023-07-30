@@ -1,0 +1,26 @@
+.upload-btn-wrap {
+    margin-bottom: 20px;
+}
+.upload-file-form-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.upload-file-input-wrap, .comment-file-input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.comment-file-input-wrap  textarea {
+    min-height: 40px;
+}
+.upload-file-form-controls {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.upload-file-form-btn-ok {
+    display: flex;
+    margin-right: 5px;
+}
