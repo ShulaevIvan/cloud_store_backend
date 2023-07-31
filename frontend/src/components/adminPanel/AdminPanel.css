@@ -3,7 +3,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
-    padding: 20px;
+    padding: 40px;
     margin-bottom: 20px;
 }
 .admin-other-users-wrap {
@@ -64,6 +64,7 @@
     min-width: 20px;
     cursor: pointer;
     color: gray;
+    margin-right: 5px;
 }
 .admin-users-remove-btn::before {
     content: '\2716';
@@ -74,21 +75,21 @@
 }
 .admin-users-active-admin-btn::before {
     content: '♛';
-    font-size: 20px;
+    font-size: 22px;
     min-width: 20px;
     cursor: pointer;
     color: gray;
 }
 .admin-users-deactive-admin-btn::before {
     content: '♛';
-    font-size: 20px;
+    font-size: 22px;
     min-width: 20px;
     cursor: pointer;
     color: black;
 }
 .admin-users-logout-admin-btn::before {
     content: '\1F6C7';
-    font-size: 18px;
+    font-size: 23px;
     min-width: 20px;
     cursor: pointer;
     color: black;

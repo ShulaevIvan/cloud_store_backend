@@ -6,13 +6,15 @@ import './components/uploadFileForm/UploadFileForm.css';
 import './components/shareWindow/ShareWindow.css';
 import './components/adminPanel/AdminPanel.css';
 import './components/userFilesAdminPopup/UserFilesAdminPopup.css';
+import './components/registerForm/RegisterForm.css';
+import './components/loginForm/LoginForm.css';
 
 import RegisterForm from './components/registerForm/RegisterForm';
-import { BrowserRouter, Routes, Route, HashRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './components/homepage/HomePage';
 import CloudHeader from './components/cloudHeader/CloudHeader';
 import CloudBody from './components/cloudBody/CloudBody';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 function App() {
   const storageUserData = JSON.parse(localStorage.getItem('userData'));

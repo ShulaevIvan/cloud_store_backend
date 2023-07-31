@@ -19,7 +19,6 @@ from django.urls import path
 from .views import index
 from api.views import LoginUserView, LogoutUserView, SingupUserView, UsersView, GetUserFiles, UserFileControl, UsersControl, UsersDetail, download_file_by_id
 
-
 urlpatterns = [
     # path('', index),
     # path('store/', index),

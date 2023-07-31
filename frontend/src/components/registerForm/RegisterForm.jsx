@@ -37,9 +37,9 @@ const RegisterForm = (props) => {
             validate: () => {
                 const pattern = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
                 if (formState.passwordInput.passwordRef.current.value.match(pattern)) {
-                    return false
+                    return false;
                 }
-                return true
+                return true;
             },
         },
         confirmPasswordInput: {
@@ -48,9 +48,9 @@ const RegisterForm = (props) => {
             validate: () => {
                 const pattern = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
                 if (formState.confirmPasswordInput.confirmPasswordRef.current.value.match(pattern)) {
-                    return false
+                    return false;
                 }
-                return true
+                return true;
             }
         },
         emailInput: {
@@ -115,7 +115,23 @@ const RegisterForm = (props) => {
             allInputsValid: prevState.allInputsValid = false
         }));
         
-    }
+    };
+
+    const cancelRegisterHandler = () => {
+        formState.loginInput.loginRef.current.value = '';
+        formState.fullNameInput.fullNameRef.current.value = '';
+        formState.passwordInput.passwordRef.current.value = '';
+        formState.confirmPasswordInput.confirmPasswordRef.current.value = '';
+        formState.emailInput.emailRef.current.value = '';
+        if (props.adminRegister) {
+            props.setAdminPanelState(prevState => ({
+                ...prevState,
+                activeRegister: prevState.activeRegister = false,
+            }));
+            return;
+        }
+        navigate('/');
+    };
 
     useEffect(()=> {
         if (formState.allInputsValid && !formState.errorMessage) {
@@ -161,6 +177,7 @@ const RegisterForm = (props) => {
             }
             fetchFunc();
         }
+    // eslint-disable-next-line
     }, [formState])
 
     return (
@@ -204,8 +221,10 @@ const RegisterForm = (props) => {
                         />
                 </form>
                 <div className="register-btn-wrap">
-                    <button onClick={registerHandler}>Регистрация</button>
+                    <button onClick={registerHandler}>Register</button>
+                    <button onClick={cancelRegisterHandler}>Cancel</button>
                 </div>
+               
             </div>
             <div className="form-register-status">{
                 formState.errorMessage ? 

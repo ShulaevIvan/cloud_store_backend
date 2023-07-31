@@ -204,7 +204,7 @@ const AdminPanel = (props) => {
                                 <div className="admin-other-users-item-email">{item.email}</div>
                                 <div className="admin-other-users-item-access-level">{item.is_staff ? 'role: admin': 'role: user'}</div>
                                 <div className="admin-other-users-item-files-count">{item.files_count} files</div>
-                                <div className="admin-other-users-item-memory-usage">Memory usage: {(Number(item.files_size) / 1024 / 1024).toFixed()}mb</div>
+                                <div className="admin-other-users-item-memory-usage">Memory usage: {(Number(item.files_size) / 1024 / 1024).toFixed(2)}mb</div>
                                 <div className="admin-other-users-item-control-wrap">
                                     <button onClick={() => userFilesAdminPopupHandler(item.id)}>Manage user files</button>
                                 </div>

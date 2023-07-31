@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404,HttpResponse
 from django.contrib.auth import authenticate
+from django.conf import settings
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -31,14 +32,14 @@ class LoginUserView(APIView):
             token, created = Token.objects.get_or_create(user=user)
             serializer = SingUpLoginSerializer(instance=user)
 
-            if os.path.exists(f'users_store/{user}'):
+            if os.path.exists(f'{settings.USERS_STORE_DIR}/{user}'):
                 pass
             else:
-                os.mkdir(f'users_store/{user}')
+                os.mkdir(f'{settings.USERS_STORE_DIR}/{user}')
     
             if user.is_staff:
                 admin_user = CloudUser.objects.get(id = user.id)
-                admin_user.store_path = f'users_store/{user}'
+                admin_user.store_path = f'{settings.USERS_STORE_DIR}/{user}'
                 authenticate(username=admin_user.username, password=admin_user.password)
                 admin_user.save()
             
@@ -80,7 +81,7 @@ class SingupUserView(APIView):
                 user = CloudUser.objects.get(username = request.data['username'])
                 user.set_password(request.data['password'])
                 user.full_name = request.data['full_name']
-                user.store_path = f'users_store/{user}'
+                user.store_path = f'{settings.USERS_STORE_DIR}/{user}'
                 user.save()
                 os.mkdir(user.store_path)
 
@@ -131,9 +132,15 @@ class UserFileControl(APIView):
 
     def get(self, request):
         try:
+            download = request.GET.get('download')
             file_id = request.GET.get('id')
             file_obj = CloudUserFiles.objects.all().filter(file_uid=file_id).values()
             user_check = CloudUser.objects.get(id=file_obj[0]['user_id'])
+            
+            if download:
+                file = CloudUserFiles.objects.get(file_uid=file_id, user=file_obj[0]['user_id'])
+                file.file_last_download_time = datetime.datetime.now()
+                file.save()
 
             if file_obj[0] and user_check.is_authenticated or file_obj[0] and user_check.is_staff:
                 return Response(file_obj[0], status=status.HTTP_200_OK)
@@ -295,14 +302,14 @@ class UsersDetail(APIView):
             return Response({'status': 'not found'}, status=status.HTTP_400_BAD_REQUEST)
         except:
             return Response({'status': 'err'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
+
 
 def download_file_by_id(request, file_uid):
     try:
         target_file = CloudUserFiles.objects.all().get(file_uid=file_uid)
         file_path = target_file.file_path
-        target_file.file_last_download_time = datetime.datetime.now()
-        target_file.save()
+        # target_file.file_last_download_time = datetime.datetime.now()
+        # target_file.save()
 
         with open(file_path, 'rb') as fh:
             response = HttpResponse(fh.read(), content_type=target_file.file_type)

@@ -1,0 +1,33 @@
+.login-wrapper {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin-top: 5%;
+}
+.login-form-wrap {
+    padding: 40px;
+}
+.login-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.login-form label {
+    margin-right: 10px;
+}
+.login-input-wrap, .password-input-wrap, .enter-btn-wrap {
+    display: flex;
+    margin-right: 10px;
+}
+.login-err-hidden {
+    visibility: hidden;
+}
+.login-err-show {
+    visibility: show;
+}

@@ -1,6 +1,21 @@
 .upload-btn-wrap {
     margin-bottom: 20px;
 }
+.upload-btn-wrap a {
+    -webkit-writing-mode: horizontal-tb !important;
+    -webkit-appearance: button;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    padding: 1px 7px 2px;
+    text-rendering: auto;
+    color: initial;
+    display: inline-block;
+    text-align: start;
+    margin: 0em;
+    font: 400 14px system-ui;
+    text-decoration: none;
+}
 .upload-file-form-wrap {
     display: flex;
     flex-direction: column;

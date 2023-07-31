@@ -34,6 +34,7 @@
     min-height: 150px;
     margin-right: 20px;
     margin-bottom: 20px;
+    background-color: white;
 }
 .admin-user-files-control-item {
     display: flex;

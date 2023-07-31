@@ -63,6 +63,10 @@ const HeaderMenu = () => {
         fetchFunc();
     };
 
+    const myFilesHandler = () => {
+        navigate('/store');
+    };
+
     return (
         <div className='cloud-header-menu'>
             <span className="user-menu-btn" onClick={menuHandler}></span>
@@ -70,7 +74,7 @@ const HeaderMenu = () => {
                 menuState.menuActive ? 'user-menu-header user-menu-active' : 'user-menu-header user-menu-hidden'
                 }
             >
-                <li><Link>MyFiels</Link></li>
+                <li><Link onClick={myFilesHandler}>MyFiels</Link></li>
                 <li><Link onClick={logoutHandler}>Logout</Link></li>
             </ul>
     </div>

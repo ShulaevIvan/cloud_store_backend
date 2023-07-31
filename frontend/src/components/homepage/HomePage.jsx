@@ -23,10 +23,10 @@ const HomePage = () => {
                     <div className="login-form">
                         <LoginForm></LoginForm>
                     </div>
-                </div>
-                <div className="register-wrap">
-                    <div className="register-btn-wrap">
-                        <button onClick={(registerHandler)} className="register-btn">Register</button>
+                    <div className="register-wrap">
+                        <div className="register-btn-wrap">
+                            <button onClick={(registerHandler)} className="register-btn">Register</button>
+                        </div>
                     </div>
                 </div>
             </div> :  null}

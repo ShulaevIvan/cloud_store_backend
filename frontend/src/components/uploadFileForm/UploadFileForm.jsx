@@ -66,7 +66,6 @@ const UploadFileFrom = (props) => {
             
         })
         .then(async (data) => {
-
             return new Promise((resolve, reject) => {
                 const sendImageToDb = {
                     file_name: data.name,
@@ -88,66 +87,50 @@ const UploadFileFrom = (props) => {
 
     const uploadFileHandler = async () => {
         const files = uploadFormState.filesInput.current.files;
-        if (files.length > 1) {
+        console.log(files)
+        if (files.length > 1 || files[0].type === '') {
+            uploadFormState.filesInput.current.value = ''
+            setUploadBtnState(prevState => ({
+                uploadBtnActive: prevState.uploadBtnActive = false,
+            }));
             return;
         }
         await getBase64(files);
     };
 
     const uploadOkFileHandler = async () => {
-            return new Promise((resolve, reject) => {
-                setUploadFormState(prevState => ({
-                    ...prevState,
-                    preloadData: {
-                        ...prevState.preloadData, 
-                        file_comment: prevState.preloadData.file_comment = uploadFormState.commentInputRef.current.value,
+
+        return new Promise((resolve, reject) => {
+            setUploadFormState(prevState => ({
+                ...prevState,
+                preloadData: {
+                    ...prevState.preloadData, 
+                    file_comment: prevState.preloadData.file_comment = uploadFormState.commentInputRef.current.value,
+                },
+            }));
+            resolve();
+        })
+        .then(() => {
+            const fetchFunc = async () => {
+                await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/user_files/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Token ${userData ? userData.token : storageUserData.token}`,
                     },
-                }));
-                resolve();
-            })
-            .then(() => {
-                const fetchFunc = async () => {
-                    await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/user_files/`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Token ${userData ? userData.token : storageUserData.token}`,
-                        },
-                        body: JSON.stringify(uploadFormState.preloadData),
-                    })
-                    .then((response) => {
-                        if (response.status === 401) {
-                            dispatch(logoutUser())
-                            navigate('/');
-                            return;   
-                        }
-                        return response.json();
-                    })
-                    .then((data) => {
-                        if (!targetUserId && !isAdmin) {
-                            dispatch(addUserFiles(JSON.stringify(data)));
-                            uploadFormState.filesInput.current.value = '';
-                            setUploadBtnState(prevState => ({
-                                uploadBtnActive: prevState.uploadBtnActive = false,
-                            }));
-                            setUploadFormState(prevState => ({
-                                ...prevState,
-                                preloadData: {}
-                            }));
-                            return;
-                        }
-                        else if (!targetUserId && isAdmin) {
-                            uploadFormState.filesInput.current.value = '';
-                            setUploadBtnState(prevState => ({
-                                uploadBtnActive: prevState.uploadBtnActive = false,
-                            }));
-                            setUploadFormState(prevState => ({
-                                ...prevState,
-                                preloadData: {}
-                            }));
-                            dispatch(addUserFiles(JSON.stringify(data)));
-                            return;
-                        }
+                    body: JSON.stringify(uploadFormState.preloadData),
+                })
+                .then((response) => {
+                    if (response.status === 401) {
+                        dispatch(logoutUser())
+                        navigate('/');
+                        return;   
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    if (!targetUserId && !isAdmin) {
+                        dispatch(addUserFiles(JSON.stringify(data)));
                         uploadFormState.filesInput.current.value = '';
                         setUploadBtnState(prevState => ({
                             uploadBtnActive: prevState.uploadBtnActive = false,
@@ -156,16 +139,38 @@ const UploadFileFrom = (props) => {
                             ...prevState,
                             preloadData: {}
                         }));
-
-                        props.setUserAdminState(prevState => ({
-                            ...prevState,
-                            userFiles: prevState.userFiles = [...props.userAdminState, data]
+                        return;
+                    }
+                    else if (!targetUserId && isAdmin) {
+                        uploadFormState.filesInput.current.value = '';
+                        setUploadBtnState(prevState => ({
+                            uploadBtnActive: prevState.uploadBtnActive = false,
                         }));
-                    })
-                };
-                fetchFunc();
+                        setUploadFormState(prevState => ({
+                            ...prevState,
+                            preloadData: {}
+                        }));
+                        dispatch(addUserFiles(JSON.stringify(data)));
+                        return;
+                    }
+                    uploadFormState.filesInput.current.value = '';
+                    setUploadBtnState(prevState => ({
+                        uploadBtnActive: prevState.uploadBtnActive = false,
+                    }));
+                    setUploadFormState(prevState => ({
+                        ...prevState,
+                        preloadData: {}
+                    }));
+
+                    props.setUserAdminState(prevState => ({
+                        ...prevState,
+                        userFiles: prevState.userFiles = [...props.userAdminState, data]
+                    }));
+                })
+            };
+            fetchFunc();
                
-            });
+        });
     };
 
     return (

@@ -10,6 +10,7 @@ const FileItem = (props) => {
     const time =  props.file_created_time.match(/\d{2}\:\d{2}\:\d{2}/)[0];
     const lastDownloadTime = props.file_last_download_time ? props.file_last_download_time.match(/\d{2}\:\d{2}\:\d{2}/)[0] : '';
     const lastDownloadDate  = props.file_last_download_time ? props.file_last_download_time.match(/\d{2}\:\d{2}\:\d{2}/)[0] : '';
+    
 
     return (
         <React.Fragment>
@@ -18,10 +19,12 @@ const FileItem = (props) => {
                 <div className="cloud-item-controls">
                     <span className="cloud-item-share-btn" onClick={() => props.shareHandler(props.file_uid)}></span>
                     <a className="cloud-item-download-btn"
-                        onClick={() => props.downloadHandler(props.file_uid)} 
+                        onClick={() => {
+                            props.downloadHandler(props.file_uid)
+                        }}
+                        download={`${props.file_url}.${props.file_type.match(/\w+$/)[0]}`}
                         href={props.file_url}
-                        type={props.file_type} 
-                        download={`${props.file_name}.${props.file_type.match(/\w+$/)[0]}`}  
+                        type={props.file_type}
                         target="_blank"
                         rel="noopener"
                     ></a>

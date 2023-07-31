@@ -87,9 +87,9 @@ const CloudBody = () => {
         fetchFunc();
     };
 
-    const downloadHandler = (id) => {
+    const downloadHandler = async (id) => {
         const fetchFunc = async () => {
-            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/user_files/?id=${id}`, {
+            await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/user_files/?id=${id}&download=true`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

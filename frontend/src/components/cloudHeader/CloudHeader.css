@@ -8,11 +8,14 @@
 .cloud-header-wrap {
     display: flex;
     flex-direction: row;
+    align-items: center;
     flex-wrap: wrap;
+    justify-content: center;
     width: 100%;
     max-width: 800px;
     padding: 20px;
-    margin-right: 15%;
+    /* margin: 0 25%; */
+    /* margin-right: 15%; */
 }
 .cloud-header-search-wrap {
     display: flex;
