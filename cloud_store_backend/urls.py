@@ -20,9 +20,9 @@ from .views import index
 from api.views import LoginUserView, LogoutUserView, SingupUserView, UsersView, GetUserFiles, UserFileControl, UsersControl, UsersDetail, download_file_by_id
 
 urlpatterns = [
-    # path('', index),
-    # path('store/', index),
-    # path('register/', index),
+    path('', index),
+    path('store/', index),
+    path('register/', index),
     path('admin/', admin.site.urls),
     path('singup/', SingupUserView.as_view()),
     path('login/', LoginUserView.as_view()),
