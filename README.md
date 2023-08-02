@@ -1,4 +1,6 @@
-http://31.31.202.214/
+### Пример развертывания 
+
+- http://31.31.202.214/
 
 ### Инструкция по развертыванию :
     щаблон настроки settingsTODeployVPS.py
@@ -30,8 +32,8 @@ http://31.31.202.214/
 linux ubuntu 22.04
 
 ### Обновление и установка пакетов:
-- <sudo apt update>
-- <sudo apt install sudo apt install  python3-pip python3-dev python3-venv libpq-dev postgresql postgresql-contrib nginx supervisor>
+<sudo apt update >
+<sudo apt install sudo apt install  python3-pip python3-dev python3-venv libpq-dev postgresql postgresql-contrib nginx supervisor >
 
 
 ### Создание DATABASE POSTGRESS
