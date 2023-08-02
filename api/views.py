@@ -1,6 +1,14 @@
+import os
+import shutil
+import base64
+import re
+import uuid
+import datetime
+import logging
+
+from django.conf import settings
 from django.shortcuts import get_object_or_404,HttpResponse
 from django.contrib.auth import authenticate
-from django.conf import settings
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -11,13 +19,7 @@ from rest_framework.authentication import TokenAuthentication
 from users.models import CloudUser, CloudUserFiles
 from .serializers import CloudUsersSerializer, SingUpLoginSerializer, UserFileControlSerializer
 
-import os
-import shutil
-import base64
-import re
-import uuid
-import datetime
-import logging
+
 
 logger = logging.getLogger(__name__)
 
@@ -190,7 +192,7 @@ class UserFileControl(APIView):
                         file_uid = file_id,
                         file_name = f'{file_name}.{file_type}',
                         file_type = request.data['file_type'],
-                        file_url = f'http://127.0.0.1:8000/user/file/{file_id}/',
+                        file_url = f'{settings.SERVER_URL}/user/file/{file_id}/',
                         file_comment = request.data['file_comment'],
                         user = CloudUser(id=request.data['user']),
                         file_path = f'{user.store_path}/{file_name}{file_id}.{file_type}',
