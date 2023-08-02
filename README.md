@@ -32,8 +32,8 @@
 linux ubuntu 22.04
 
 ### Обновление и установка пакетов:
-<sudo apt update >
-<sudo apt install sudo apt install  python3-pip python3-dev python3-venv libpq-dev postgresql postgresql-contrib nginx supervisor >
+- sudo apt update
+- sudo apt install sudo apt install  python3-pip python3-dev python3-venv libpq-dev postgresql postgresql-contrib nginx supervisor
 
 
 ### Создание DATABASE POSTGRESS
@@ -50,8 +50,6 @@ linux ubuntu 22.04
 
 ##### выход в терминал
 - \q
-
-
 
 ##### Получение файлов из репозитория
 - git clone https://github.com/ShulaevIvan/cloud_store_bakcend.git
@@ -93,7 +91,7 @@ linux ubuntu 22.04
 - <sudo nano /etc/nginx/sites-available/default>
 
 ###### в файле default 
-##### комментируем / удаляем все втавляем команду ниже
+##### комментируем / удаляем все,  втавляем код ниже
 server {
         listen       80;
         server_name  yourIP OR DOMAIN;
@@ -121,15 +119,15 @@ upstream uvicorn {
 
 ### Папка Frontend
 - в файле .env указать адрес сервера
-- <sudo apt install npm> установка npm
-- <npm install> установка зависимостей
-- <npm run build>
+- sudo apt install npm установка npm
+- npm install установка зависимостей
+- npm run build
 
 ### сборка
-<pytohn3 manage.py collectstatic>
+- pytohn3 manage.py collectstatic
 
 ### Перезапуск nginx
-    - <service nginx restart>
+    - service nginx restart
 
 ### Перезапуск supervisor
-- <service supervisor restart>
+- service supervisor restart
