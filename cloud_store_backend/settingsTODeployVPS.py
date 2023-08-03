@@ -79,6 +79,8 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = 'cloud_store_backend.wsgi.application'
 
 # Database
@@ -89,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'YOUR DATABASE NAME',
         'USER': 'YOUR USERNAME LOGIN TO CONNECT DB',
-        'PASSWORD': 'YOUR PASSWORD TO DB',
+        'PASSWORD': 'dnweapons',
         'HOST': 'localhost',
         'PORT': '5432',
     }

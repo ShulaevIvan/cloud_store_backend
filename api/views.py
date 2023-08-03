@@ -170,7 +170,7 @@ class UserFileControl(APIView):
                 target_file.save()
 
                 new_file_path = f'{user.store_path}/{target_file.file_name}{target_file.file_uid}.{file_type}'
-                new_file = CloudUserFiles.objects.get(user=user_id, file_uid = file_id)
+                new_file = CloudUserFiles.objects.get(user=user_id, file_uid=file_id)
                 new_file.file_path = new_file_path
                 new_file.save()
                 response = CloudUserFiles.objects.all().filter(file_uid = file_id, user=user_id).values()[0]

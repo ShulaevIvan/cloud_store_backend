@@ -6,6 +6,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 USERS_STORE_DIR = 'users_store'
 SERVER_URL = 'http://localhost:8000'
+STATIC_URL = 'static/'
+
 
 
 # Quick-start development settings - unsuitable for production
