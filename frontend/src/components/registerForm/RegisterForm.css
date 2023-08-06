@@ -13,6 +13,7 @@
 }
 .register-from {
     display: flex;
+    width: 100%;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
@@ -39,4 +40,20 @@
 }
 .register-form-input-err {
     border: 1px solid red;
+}
+.register-input-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 10px;
+}
+.error-placeholder {
+    top: 80%;
+    position: absolute;
+    height: 20px;
+    font-size: 12px;
+    background-color: #D14;
+    color: white;
+    width: 100%;
 }

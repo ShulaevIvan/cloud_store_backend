@@ -141,7 +141,7 @@ class UserFileControl(APIView):
             
             if download:
                 file = CloudUserFiles.objects.get(file_uid=file_id, user=file_obj[0]['user_id'])
-                file.file_last_download_time = datetime.datetime.now()
+                file.file_last_download_time = datetime.datetime.utcnow()
                 file.save()
 
             if file_obj[0] and user_check.is_authenticated or file_obj[0] and user_check.is_staff:

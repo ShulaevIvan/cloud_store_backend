@@ -5,10 +5,9 @@ import HeaderMenu from "../headerMenu/HeaderMenu";
 
 const CloudHeader = () => {
     const user = useSelector((state) => state.user);
-    const storageUserData = JSON.parse(localStorage.getItem('userData'))
-    let location = useLocation();
-
-    if ((user.userAuthenticated || storageUserData.user.userAuthenticated )&& (location !== '/' && location !== '/singup')) {
+    const storageUserData = JSON.parse(localStorage.getItem('userData'));
+    const location  = useLocation();
+    if ((user.userAuthenticated || storageUserData.user.userAuthenticated) && location.pathname !== '/' && location.pathname !== '/register') {
         return (
             <div className="cloud-header">
                 <div className="cloud-header-wrap">

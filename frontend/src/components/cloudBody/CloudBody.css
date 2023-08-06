@@ -28,9 +28,9 @@
     flex-direction: row;
     width: 100%;
 }
-.cloud-files-item-wrap{
+.cloud-files-item-wrap {
     display: flex;
-    width: 17%;
+    max-width: 25%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -38,9 +38,15 @@
     position: relative;
     cursor: pointer;
 }
-.cloud-item-img img {
-    max-width: 150px;
+.cloud-files-item-wrap video {
+    max-height: 170px;
 }
+.cloud-item-img img {
+    display: flex;
+    max-height: 200px;
+    max-width: 200px;
+}
+
 .cloud-item-filename {
     margin-bottom: 10px;
     text-transform: capitalize;
@@ -124,4 +130,10 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
+}
+.cloud-item-comment {
+    font-size: 14px;
+    max-width: 300px;
+    margin: 2px;
+    padding: 5px;
 }

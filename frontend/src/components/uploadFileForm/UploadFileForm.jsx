@@ -87,7 +87,6 @@ const UploadFileFrom = (props) => {
 
     const uploadFileHandler = async () => {
         const files = uploadFormState.filesInput.current.files;
-        console.log(files)
         if (files.length > 1 || files[0].type === '') {
             uploadFormState.filesInput.current.value = ''
             setUploadBtnState(prevState => ({

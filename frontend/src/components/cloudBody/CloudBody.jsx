@@ -17,7 +17,13 @@ const CloudBody = () => {
     const navigate = useNavigate();
     const [userFilesState, setUserFilesState] = useState({ files: uFiles });
     const [loadBlobState, setLoadBlob] = useState({ blobFiles: [] });
-    const [shareWindow, setShareWindow] = useState({ windowActive: false })
+    const [shareWindow, setShareWindow] = useState({ 
+        windowActive: false, 
+        shareFile: null, 
+        linkActive: false, 
+        linkText: 'copy link',
+        cords: {}
+    });
     const [renameInput, setRenameInput] = useState({
         inputActive: false,
         editId: undefined,
@@ -111,7 +117,14 @@ const CloudBody = () => {
         fetchFunc();
     }
 
-    const shareFileHandler = (id) => {
+    const shareFileHandler = async (e, id) => {
+        console.log(e)
+        setShareWindow(prevState => ({
+            ...prevState,
+            windowActive: prevState.windowActive = false,
+            cords: prevState.cords = {left: e.clientX / 2, top: e.clientY},
+        }));
+
         const fetchFunc = async () => {
             await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/user_files/?id=${id}`, {
                 method: 'GET',
@@ -131,18 +144,40 @@ const CloudBody = () => {
             .then((data) => {
                 setShareWindow(prevState => ({
                     ...prevState,
+                    shareFileId: prevState.shareFile = data,
                     windowActive: prevState.windowActive = true,
                 }));
+                return;
             });
         }
         fetchFunc();
-    }
+    };
 
     const shareFileCloseHandler = () => {
         setShareWindow(prevState => ({
             ...prevState,
+            shareFileId: prevState.shareFile = null,
             windowActive: prevState.windowActive = false,
+            linkActive: prevState.linkActive = false,
+            linkText: prevState.linkText = 'copylink',
         }));
+    };
+    const shareFileLinkHandler = (link) => {
+        if (shareWindow.linkActive) {
+            setShareWindow(prevState => ({
+                ...prevState,
+                linkActive: prevState.linkActive = false,
+                linkText: prevState.linkText = 'copylink',
+            }));
+            navigator.clipboard.writeText('');
+            return;
+        }
+        setShareWindow(prevState => ({
+            ...prevState,
+            linkActive: prevState.linkActive = true,
+            linkText: prevState.linkText = 'copied',
+        }));
+        navigator.clipboard.writeText(link);
     };
 
     const editOkHandler = (id) => {
@@ -195,8 +230,38 @@ const CloudBody = () => {
         renameInput.commentInputRef.current.value = '';
     };
 
+    const getDownloadTime = (date) => {
+        const time = new Date(date);
+        const plus = time.toString().match(/[+]/);
+        const min = time.toString().match(/[-]/);
+        //eslint-disable-next-line
+        const difHours = time.toString().match(/\GMT\S+/);
+        if (plus[0] && difHours[0]) {
+            //eslint-disable-next-line
+            const hours = time.getHours() + Number(difHours[0].replace(/\GMT/, '').replace(/\+/, '').replace(/0/g, ''));
+            time.setHours(hours);
+            if (new Date().getFullYear() - time.getFullYear() > 25) {
+                return '';
+            }
+            return String(time);
+        }
+        else if (min[0] && difHours[0]) {
+            //eslint-disable-next-line
+            const hours = time.getHours() - Number(difHours[0].replace(/\GMT/, '').replace(/\-/, '').replace(/0/g, ''));
+            time.setHours(hours);
+            if (new Date().getFullYear() - time.getFullYear() > 25) {
+                return '';
+            }
+            return String(time);
+        }
+        if (new Date().getFullYear() - time.getFullYear() > 25) {
+            return '';
+        }
+        return String(time);
+    };
+    
+
     useEffect(() => {
-        
         const getFiles = async () => {
             await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/files/`, {
                 method: 'POST',
@@ -219,7 +284,7 @@ const CloudBody = () => {
                 dispatch(replaceUserFiles(JSON.stringify(data)));
                 setUserFilesState(prevState => ({
                     ...prevState,
-                    files: prevState.files = data,
+                    files: prevState.files = data.sort((a, b) => new Date(a.file_created_time) - new Date(b.file_created_time)).reverse(),
                 }));
             });
         }
@@ -229,6 +294,7 @@ const CloudBody = () => {
 
     useEffect(() => {
         if (JSON.stringify(userFilesState.files) !== JSON.stringify(uFiles)) {
+            
             uFiles.map((item) => {
                 const fetchBlob = async () => {
                     await fetch(`${item.file_url}`, {
@@ -248,18 +314,17 @@ const CloudBody = () => {
                     })
                     .then((data) => {
                         const resultBlob = {fileId: item.file_uid, fileBlob: URL.createObjectURL(new Blob([data], {type: item.file_type}))}
-                        
                         setLoadBlob(prevState => ({
                             ...prevState,
                             blobFiles: [...prevState.blobFiles, resultBlob]
-                        }))
-                    })
+                        }));
+                    });
                 }
                 return fetchBlob();
             });
             setUserFilesState(prevState => ({
                 ...prevState,
-                files: uFiles
+                files: Array.from(uFiles).sort((a,b) =>  a.file_created_time - b.file_created_time).reverse(),
             })); 
         }
     // eslint-disable-next-line
@@ -280,17 +345,24 @@ const CloudBody = () => {
                     {userFilesState.files.map((item) => {
                         return (
                             <React.Fragment key={Math.random()}>
-                                {shareWindow.windowActive ? 
+                                {shareWindow.windowActive && shareWindow.shareFile && shareWindow.shareFile.file_uid === item.file_uid ? 
                                     <ShareWindow
                                         key= {Math.random()}
+                                        file_id={item.file_uid}
                                         fileLink={item.file_url} 
                                         fileName = {item.file_name}
                                         closeHandler = {shareFileCloseHandler}
-                                    /> : null}
+                                        linkHandler = {shareFileLinkHandler}
+                                        linkText = {shareWindow.linkText}
+                                        cords = {shareWindow.cords}
+                                    /> : 
+                                null}
                                 
                                 <FileItem
                                     key= {item.file_uid}
-                                    {...item} 
+                                    {...item}
+                                    lastDownloadTime = {getDownloadTime(item.file_last_download_time)}
+                                    lastUploadDate = {getDownloadTime(item.file_created_time)}
                                     removeHandler = {rmFileHandler} 
                                     renameHandler = {renameFileHandler} 
                                     shareHandler  = {shareFileHandler}

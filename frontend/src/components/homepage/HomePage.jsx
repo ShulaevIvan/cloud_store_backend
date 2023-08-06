@@ -18,7 +18,7 @@ const HomePage = () => {
     
     return (
         <React.Fragment>
-            {!user.userAuthenticated ?  <div className="container">
+            {!user.userAuthenticated && window.location.pathname === '/' ?  <div className="container">
                 <div className="login-wrapper">
                     <div className="login-form">
                         <LoginForm></LoginForm>

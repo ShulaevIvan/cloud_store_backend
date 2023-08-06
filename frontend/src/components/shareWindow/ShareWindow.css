@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     width: 100%;
     max-width: 800px;
-    position: absolute;
+    position: fixed;
     border: 1px solid;
     min-height: 300px;
     top: 25%;

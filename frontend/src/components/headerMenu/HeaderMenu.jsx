@@ -4,12 +4,16 @@ import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import { logoutUser} from "../../redux/slices/userSlice";
+import { useLocation } from "react-router-dom";
+
 
 const HeaderMenu = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const userData = useSelector((state) => state.user.userData);
+    const user = useSelector((state) => state.user);
     const storageUserData = JSON.parse(localStorage.getItem('userData'));
+    const location  = useLocation();
     const initialState = {
         menuActive: false,
     };
@@ -67,17 +71,23 @@ const HeaderMenu = () => {
         navigate('/store');
     };
 
+    
+
     return (
-        <div className='cloud-header-menu'>
-            <span className="user-menu-btn" onClick={menuHandler}></span>
-            <ul className={
-                menuState.menuActive ? 'user-menu-header user-menu-active' : 'user-menu-header user-menu-hidden'
-                }
-            >
-                <li><Link onClick={myFilesHandler}>MyFiels</Link></li>
-                <li><Link onClick={logoutHandler}>Logout</Link></li>
-            </ul>
-    </div>
+        <React.Fragment>
+            {(user.userAuthenticated || storageUserData.user.userAuthenticated) && (location.pathname !== '/' || location.pathname !== '/register') ?
+                <div className='cloud-header-menu'>
+                    <span className="user-menu-btn" onClick={menuHandler}></span>
+                    <ul className={
+                        menuState.menuActive ? 'user-menu-header user-menu-active' : 'user-menu-header user-menu-hidden'
+                        }
+                    >
+                        <li><Link onClick={myFilesHandler}>MyFiels</Link></li>
+                        <li><Link onClick={logoutHandler}>Logout</Link></li>
+                    </ul>
+                </div>
+            : null}
+        </React.Fragment>
     );
 };
 

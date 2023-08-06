@@ -72,8 +72,6 @@ const LoginForm = () => {
         if (loginFromState.storageUserData && loginFromState.storageUserData.auth) {
             loginFromState.loginInputRef.current.value = loginFromState.storageUserData.user.username;
             loginFromState.passwordInputRef.current.value = loginFromState.storageUserData.user.authPassword;
-            loginFromState.loginBtnRef.current.click();
-
             return;
         }
         else if (loginFromState.storageUserData) loginFromState.loginInputRef.current.value = loginFromState.storageUserData.user.username;

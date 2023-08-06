@@ -1,8 +1,8 @@
 .admin-panel-wrap {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    width: 100%;
+    /* width: 100%; */
     padding: 40px;
     margin-bottom: 20px;
 }
@@ -35,6 +35,10 @@
     margin-top: 20px;
 }
 .admin-panel-title {
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    flex-direction: column;
+    display: flex;
     margin-bottom: 20px;
 }
 .admin-other-users-item-controls-wrap {
@@ -93,4 +97,30 @@
     min-width: 20px;
     cursor: pointer;
     color: black;
+}
+.register-user-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.register-user-wrap button {
+    max-width: 150px;
+}
+.admin-register-form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+}
+.admin-register-form .register-form-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: 5%;
+}
+.admin-register-form .register-from{
+    margin-left: 0;
+    width: 600px;
+    margin-top: 0;
 }

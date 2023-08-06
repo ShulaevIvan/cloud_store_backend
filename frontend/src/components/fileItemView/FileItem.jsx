@@ -5,19 +5,13 @@ const FileItem = (props) => {
     const videoTypes = ['video/mp4', 'video/ogg', 'video/webm'];
     const audioTypes = ['audio/ogg', 'audio/wav', 'audio/mp3', 'audio/mpeg'];
     const targetBlob = props.blobFiles.find((item) => item.fileId === props.file_uid);
-    
-    const date = props.file_created_time.match(/^\d{4}\S{1}\d{2}\S\d{2}/)[0];
-    const time =  props.file_created_time.match(/\d{2}\:\d{2}\:\d{2}/)[0];
-    const lastDownloadTime = props.file_last_download_time ? props.file_last_download_time.match(/\d{2}\:\d{2}\:\d{2}/)[0] : '';
-    const lastDownloadDate  = props.file_last_download_time ? props.file_last_download_time.match(/\d{2}\:\d{2}\:\d{2}/)[0] : '';
-    
 
     return (
         <React.Fragment>
             <div className="cloud-files-item-wrap" key={props.id}>
             {props.renameInput}
                 <div className="cloud-item-controls">
-                    <span className="cloud-item-share-btn" onClick={() => props.shareHandler(props.file_uid)}></span>
+                    <span className="cloud-item-share-btn" onClick={(e) => props.shareHandler(e, props.file_uid)}></span>
                     <a className="cloud-item-download-btn"
                         onClick={() => {
                             props.downloadHandler(props.file_uid)
@@ -49,9 +43,9 @@ const FileItem = (props) => {
                                 <img src="https://dummyimage.com/150x150/000/fff&text=FILE" /> : null}
                 </div>
                 <div className="cloud-item-file-type">{props.file_type.match(/\w+$/)[0]}</div>
-                <div className="cloud-item-comment">Comment: {props.file_comment}</div>
-                <div className="cloud-item-last-download">Last Download: {lastDownloadTime} {lastDownloadDate}</div>
-                <div className="cloud-item-date-load">Time: {time} Date:{date}</div>
+                <div className="cloud-item-comment"><span>Comment:</span> {props.file_comment}</div>
+                <div className="cloud-item-last-download">Last Download: {props.lastDownloadTime.replace(/\s(GMT)/, '').replace(/\+\d+\s+\(\w+\s+\w+\s+\w+\)/, '')}</div>
+                <div className="cloud-item-date-load">Upload Date: {props.lastUploadDate.replace(/\s(GMT)/, '').replace(/\+\d+\s+\(\w+\s+\w+\s+\w+\)/, '')}</div>
             </div>
         </React.Fragment>
     ); 
