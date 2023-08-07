@@ -2,7 +2,8 @@ from pathlib import Path
 from os.path import join
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 USERS_STORE_DIR = 'users_store'
 SERVER_URL = 'http://localhost:8000'
@@ -11,7 +12,6 @@ MEDIA_URL = 'media/'
 STATIC_ROOT = join(BASE_DIR, 'static/')
 STATICFILES_DIRS=[(os.path.join(BASE_DIR,'frontend/build/static/'))]
 MEDIA_ROOT = join(BASE_DIR, 'media')
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -123,8 +123,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -148,9 +146,8 @@ CORS_ALLOW_METHODS = (
         'PATCH',
         'DELETE',
         'OPTIONS'
-    )
-STATIC_ROOT = join(BASE_DIR, 'static/')
-STATICFILES_DIRS=[(os.path.join(BASE_DIR,'frontend/build/static/'))]
+)
+SECURE_CROSS_ORIGIN_OPENER_POLICY=None
 USE_TZ = False
 
 LOGGING = {

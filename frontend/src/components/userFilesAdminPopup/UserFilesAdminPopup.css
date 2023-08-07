@@ -25,17 +25,17 @@
     padding: 20px;
 }
 .admin-user-files-item {
+    background-color: #fff;
+    border: 1px solid;
     display: flex;
     flex-direction: column;
-    width: 25%;
-    max-width: 200px;
-    min-width: 200px;
-    border: 1px solid;
-    padding: 10px;
-    min-height: 150px;
-    margin-right: 20px;
     margin-bottom: 20px;
-    background-color: white;
+    margin-right: 20px;
+    max-width: 250px;
+    min-height: 150px;
+    min-width: 200px;
+    padding: 10px;
+    width: 25%;
 }
 .admin-user-files-control-item {
     display: flex;

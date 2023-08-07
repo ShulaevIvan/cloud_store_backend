@@ -22,6 +22,7 @@ const CloudBody = () => {
         shareFile: null,
         linkActive: false, 
         linkText: 'copy link',
+        linkUrl: '',
     })
     const [renameInput, setRenameInput] = useState({
         inputActive: false,
@@ -139,6 +140,7 @@ const CloudBody = () => {
                     ...prevState,
                     cords: prevState.cords = {left: clientX / 2, top: clientY},
                     windowActive: prevState.windowActive = true,
+                    linkActive: prevState.linkActive = true,
                     shareFile: prevState.shareFile = data,
                 }));
                 return;
@@ -157,22 +159,28 @@ const CloudBody = () => {
         }));
     };
 
-    const shareFileLinkHandler = (link) => {
-        if (shareWindow.linkActive) {
+    const shareFileLinkHandler = async (e, link) => {
+        e.preventDefault();
+        if (shareWindow.linkActive && navigator.clipboard) {
             setShareWindow(prevState => ({
                 ...prevState,
                 linkActive: prevState.linkActive = false,
                 linkText: prevState.linkText = 'copylink',
+                linkUrl: prevState.linkUrl = link,
             }));
-            navigator.clipboard.writeText('');
-            return;
+            await navigator.clipboard.writeText(`${shareWindow.linkUrl}`);
         }
-        setShareWindow(prevState => ({
-            ...prevState,
-            linkActive: prevState.linkActive = true,
-            linkText: prevState.linkText = 'copied',
-        }));
-        navigator.clipboard.writeText(link);
+        else if (navigator.clipboard) {
+
+            setShareWindow(prevState => ({
+                ...prevState,
+                linkActive: prevState.linkActive = true,
+                linkText: prevState.linkText = 'copied',
+                linkUrl: prevState.linkUrl = '',
+            
+            }));
+            await navigator.clipboard.writeText(`${shareWindow.linkUrl}`);
+        }
     };
 
     const editOkHandler = (id) => {
@@ -339,13 +347,13 @@ const CloudBody = () => {
                         return (
                             <React.Fragment key={Math.random()}>
                                 {shareWindow.windowActive && shareWindow.shareFile && shareWindow.shareFile.file_uid === item.file_uid ? 
-                                
+
                                     <ShareWindow
                                         key= {Math.random()}
                                         fileLink={item.file_url} 
                                         fileName = {item.file_name}
                                         closeHandler = {shareFileCloseHandler}
-                                        linkHandler = {shareFileLinkHandler}
+                                        linkHandler = {(e) => shareFileLinkHandler(e, item.file_url)}
                                         linkText = {shareWindow.linkText}
                                         cords = {shareWindow.cords}
                                     /> : 
