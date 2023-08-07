@@ -18,12 +18,11 @@ const CloudBody = () => {
     const [userFilesState, setUserFilesState] = useState({ files: uFiles });
     const [loadBlobState, setLoadBlob] = useState({ blobFiles: [] });
     const [shareWindow, setShareWindow] = useState({ 
-        windowActive: false, 
-        shareFile: null, 
+        windowActive: false,
+        shareFile: null,
         linkActive: false, 
         linkText: 'copy link',
-        cords: {}
-    });
+    })
     const [renameInput, setRenameInput] = useState({
         inputActive: false,
         editId: undefined,
@@ -117,13 +116,7 @@ const CloudBody = () => {
         fetchFunc();
     }
 
-    const shareFileHandler = async (e, id) => {
-        console.log(e)
-        setShareWindow(prevState => ({
-            ...prevState,
-            windowActive: prevState.windowActive = false,
-            cords: prevState.cords = {left: e.clientX / 2, top: e.clientY},
-        }));
+    const shareFileHandler = (clientX, clientY, id) => {
 
         const fetchFunc = async () => {
             await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/users/user_files/?id=${id}`, {
@@ -144,8 +137,9 @@ const CloudBody = () => {
             .then((data) => {
                 setShareWindow(prevState => ({
                     ...prevState,
-                    shareFileId: prevState.shareFile = data,
+                    cords: prevState.cords = {left: clientX / 2, top: clientY},
                     windowActive: prevState.windowActive = true,
+                    shareFile: prevState.shareFile = data,
                 }));
                 return;
             });
@@ -162,6 +156,7 @@ const CloudBody = () => {
             linkText: prevState.linkText = 'copylink',
         }));
     };
+
     const shareFileLinkHandler = (link) => {
         if (shareWindow.linkActive) {
             setShareWindow(prevState => ({
@@ -232,12 +227,11 @@ const CloudBody = () => {
 
     const getDownloadTime = (date) => {
         const time = new Date(date);
+        const hours = time.getHours() + 3;
         const plus = time.toString().match(/[+]/);
         const min = time.toString().match(/[-]/);
-        //eslint-disable-next-line
         const difHours = time.toString().match(/\GMT\S+/);
         if (plus[0] && difHours[0]) {
-            //eslint-disable-next-line
             const hours = time.getHours() + Number(difHours[0].replace(/\GMT/, '').replace(/\+/, '').replace(/0/g, ''));
             time.setHours(hours);
             if (new Date().getFullYear() - time.getFullYear() > 25) {
@@ -246,7 +240,6 @@ const CloudBody = () => {
             return String(time);
         }
         else if (min[0] && difHours[0]) {
-            //eslint-disable-next-line
             const hours = time.getHours() - Number(difHours[0].replace(/\GMT/, '').replace(/\-/, '').replace(/0/g, ''));
             time.setHours(hours);
             if (new Date().getFullYear() - time.getFullYear() > 25) {
@@ -294,7 +287,6 @@ const CloudBody = () => {
 
     useEffect(() => {
         if (JSON.stringify(userFilesState.files) !== JSON.stringify(uFiles)) {
-            
             uFiles.map((item) => {
                 const fetchBlob = async () => {
                     await fetch(`${item.file_url}`, {
@@ -314,11 +306,12 @@ const CloudBody = () => {
                     })
                     .then((data) => {
                         const resultBlob = {fileId: item.file_uid, fileBlob: URL.createObjectURL(new Blob([data], {type: item.file_type}))}
+                        
                         setLoadBlob(prevState => ({
                             ...prevState,
                             blobFiles: [...prevState.blobFiles, resultBlob]
-                        }));
-                    });
+                        }))
+                    })
                 }
                 return fetchBlob();
             });
@@ -346,9 +339,9 @@ const CloudBody = () => {
                         return (
                             <React.Fragment key={Math.random()}>
                                 {shareWindow.windowActive && shareWindow.shareFile && shareWindow.shareFile.file_uid === item.file_uid ? 
+                                
                                     <ShareWindow
                                         key= {Math.random()}
-                                        file_id={item.file_uid}
                                         fileLink={item.file_url} 
                                         fileName = {item.file_name}
                                         closeHandler = {shareFileCloseHandler}
@@ -365,7 +358,7 @@ const CloudBody = () => {
                                     lastUploadDate = {getDownloadTime(item.file_created_time)}
                                     removeHandler = {rmFileHandler} 
                                     renameHandler = {renameFileHandler} 
-                                    shareHandler  = {shareFileHandler}
+                                    shareHandler  = {(e) => shareFileHandler(e.clientX, e.clientY, item.file_uid)}
                                     downloadHandler = {downloadHandler}
                                     blobFiles = {loadBlobState.blobFiles}
                                     renameInput = {

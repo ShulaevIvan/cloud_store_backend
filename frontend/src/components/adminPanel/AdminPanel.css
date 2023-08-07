@@ -1,8 +1,8 @@
 .admin-panel-wrap {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
-    /* width: 100%; */
+    width: 100%;
     padding: 40px;
     margin-bottom: 20px;
 }
@@ -17,6 +17,7 @@
     flex-direction: column;
     max-width: 33%;
     border: 1px solid;
+    min-width: 180px;
     padding: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -35,10 +36,6 @@
     margin-top: 20px;
 }
 .admin-panel-title {
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    flex-direction: column;
-    display: flex;
     margin-bottom: 20px;
 }
 .admin-other-users-item-controls-wrap {

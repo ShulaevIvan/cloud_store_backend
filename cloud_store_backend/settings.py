@@ -7,6 +7,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 USERS_STORE_DIR = 'users_store'
 SERVER_URL = 'http://localhost:8000'
 STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
+STATIC_ROOT = join(BASE_DIR, 'static/')
+STATICFILES_DIRS=[(os.path.join(BASE_DIR,'frontend/build/static/'))]
+MEDIA_ROOT = join(BASE_DIR, 'media')
 
 
 
@@ -19,7 +23,7 @@ SECRET_KEY = 'django-insecure-j9*-_+@o)@$9@o1m3#ufhxtwl$x-d8-sl-ebj2kdb!^v_t%_32
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -119,10 +123,6 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = 'static/'
 
 
 # Default primary key field type
@@ -140,11 +140,6 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 AUTH_USER_MODEL = "users.CloudUser" 
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000']
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://localhost:8000',
-]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = (
         'GET',

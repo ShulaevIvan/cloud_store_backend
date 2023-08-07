@@ -11,7 +11,7 @@ const FileItem = (props) => {
             <div className="cloud-files-item-wrap" key={props.id}>
             {props.renameInput}
                 <div className="cloud-item-controls">
-                    <span className="cloud-item-share-btn" onClick={(e) => props.shareHandler(e, props.file_uid)}></span>
+                    <span className="cloud-item-share-btn" onClick={props.shareHandler}></span>
                     <a className="cloud-item-download-btn"
                         onClick={() => {
                             props.downloadHandler(props.file_uid)
