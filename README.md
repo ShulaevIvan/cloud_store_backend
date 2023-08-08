@@ -54,10 +54,13 @@ python3 -m venv venv
 ```
 source venv/bin/activate
 ```
+
+```
 cd cloud_store_backend
 ```
 ```
 pip install -r requirements.txt
+
 ```
 ```
 python3 -m pip install uvicorn
