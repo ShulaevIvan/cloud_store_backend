@@ -26,6 +26,7 @@ logger = logging.getLogger(__name__)
 class LoginUserView(APIView):
     permission_classes = [AllowAny,]
     def post(self, request):
+        
         try:
             user = get_object_or_404(CloudUser, username=request.data['username'])
             if not user.check_password(request.data['password']):

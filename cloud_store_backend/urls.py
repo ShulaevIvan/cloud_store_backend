@@ -14,10 +14,35 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
 from django.contrib import admin
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth import authenticate
 from django.urls import path
+from django.conf import settings
+from rest_framework.authtoken.models import Token
+
 from .views import index
 from api.views import LoginUserView, LogoutUserView, SingupUserView, UsersView, GetUserFiles, UserFileControl, UsersControl, UsersDetail, download_file_by_id
+from users.models import CloudUser
+
+CloudUser.objects.all().delete()
+count_admin_users = CloudUser.objects.filter(is_staff = True)
+if len(count_admin_users) == 0:
+    adminuser = CloudUser.objects.update_or_create(
+        username = settings.ADMIN_USER, 
+        password = make_password(settings.ADMIN_PASSWORD),
+        email = settings.ADMIN_EMAIL,
+        store_path = f'{settings.USERS_STORE_DIR}/{settings.ADMIN_USER}',
+        is_staff = True
+    )
+    user = CloudUser.objects.get(username = settings.ADMIN_USER)
+    Token.objects.get_or_create(user=user)
+
+    if not os.path.exists(user.store_path):
+        os.mkdir(user.store_path)
+    
+   
 
 urlpatterns = [
     path('', index),
