@@ -1,3 +1,17 @@
+## Инструкция по развертыванию приложения:
+
+### ubuntu 22.03
+
+Подключаемся к серверу по ssh.
+
+### Установка необходимых пакетов
+
+Replace a text with PHP
+```
+sudo apt update
+sudo apt install python3-pip python3-dev python3-venv libpq-dev postgresql postgresql-contrib nginx supervisor
+```
+
 sudo apt update
 sudo apt install python3-pip python3-dev python3-venv libpq-dev postgresql postgresql-contrib nginx supervisor
 
