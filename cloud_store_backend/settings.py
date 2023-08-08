@@ -3,7 +3,6 @@ from os.path import join
 import os
 
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 USERS_STORE_DIR = 'users_store'
 SERVER_URL = 'http://localhost:8000'
@@ -138,15 +137,10 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 AUTH_USER_MODEL = "users.CloudUser" 
+SECURE_CROSS_ORIGIN_OPENER_POLICY=None
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_METHODS = (
-        'GET',
-        'POST',
-        'PUT',
-        'PATCH',
-        'DELETE',
-        'OPTIONS'
-)
+CORS_ALLOW_METHODS = ('GET','POST','PUT','PATCH','DELETE','OPTIONS',)
+
 SECURE_CROSS_ORIGIN_OPENER_POLICY=None
 USE_TZ = False
 
