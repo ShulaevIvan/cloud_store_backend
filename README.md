@@ -71,6 +71,7 @@ python3 -m pip install uvicorn
 ```
 python3 manage.py makemigrations
 ```
+```
 python3 manage.py migrate
 ```
 ```
