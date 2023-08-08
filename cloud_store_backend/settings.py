@@ -13,7 +13,7 @@ STATICFILES_DIRS=[(os.path.join(BASE_DIR,'frontend/build/static/'))]
 MEDIA_ROOT = join(BASE_DIR, 'media')
 
 ADMIN_USER = 'admin'
-ADMIN_PASSWORD = 'admin'
+ADMIN_PASSWORD = 'admin2'
 ADMIN_EMAIL = 'testemail22.ru'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/

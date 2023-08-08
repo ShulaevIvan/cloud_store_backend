@@ -26,6 +26,7 @@ from .views import index
 from api.views import LoginUserView, LogoutUserView, SingupUserView, UsersView, GetUserFiles, UserFileControl, UsersControl, UsersDetail, download_file_by_id
 from users.models import CloudUser
 
+
 count_admin_users = CloudUser.objects.filter(is_staff = True)
 if len(count_admin_users) == 0:
     adminuser = CloudUser.objects.update_or_create(
