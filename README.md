@@ -12,6 +12,8 @@ https://github.com/ShulaevIvan/cloud_store_frontend
 ### Установка необходимых пакетов
 ```
 sudo apt update
+```
+```
 sudo apt install python3-pip python3-dev python3-venv libpq-dev postgresql postgresql-contrib nginx supervisor
 ```
 ### Установка/конфигурирование DB postgres
@@ -19,12 +21,24 @@ password и db_name можно использовать любой, но тог�
 ```
 sudo -u postgresql -psql
 ```
+```
 CREATE USER cloud with password 'dnweapons1513';
+```
+```
 CREATE DATABASE cloud_base with owner 'cloud';
+```
+```
 ALTER ROLE cloud SET client_encoding to 'utf-8';
+```
+```
 ALTER ROLE cloud SET default_transaction_isolation TO 'read committed';
+```
+```
 ALTER ROLE cloud SET timezone TO 'GMT+3';
+```
+```
 GRANT ALL PRIVILEGES ON DATABASE cloud_base TO cloud;
+```
 ```
  \q
 ```
@@ -33,26 +47,41 @@ GRANT ALL PRIVILEGES ON DATABASE cloud_base TO cloud;
 
 ```
 git clone https://github.com/ShulaevIvan/cloud_store_backend.git
+```
+```
 python3 -m venv venv
+```
+```
 source venv/bin/activate
+```
 cd cloud_store_backend
+```
+```
 pip install -r requirements.txt
+```
+```
 python3 -m pip install uvicorn
 ```
+
 ### Создание миграций/superuser
+
 ```
 python3 manage.py makemigrations
+```
 python3 manage.py migrate
+```
 python3 manage.py collectstatic
-python3 manage.py createsuperuser (name mail password)
+```
+```
+```
+python3 manage.py createsuperuser
 ```
 ### проверка работоспособности сокета
 
 ```
 python3 -m uvicorn cloud_store_backend.asgi:application --uds /tmp/uvicorn.sock
-CTR + C
 ```
-
+CTR + C
 ### Настройка supervisor
 
 ```
@@ -75,6 +104,8 @@ sudo service supervisor restart
 
 ```
 sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default-backup
+```
+```
 sudo nano /etc/nginx/sites-available/default
 ```
 Удалить/закоментировать все записи, вставить данный код в конец / начало файла и сохранить CTR +X
@@ -113,6 +144,8 @@ nano /etc/nginx/nginx.conf
 
 ```
 cd frontend
+```
+```
 apt install npm
 ```
 
@@ -128,6 +161,7 @@ REACT_APP_BACKEND_URL='http://Ваш IP'
 
 ```
 npm run build
+```
 ```
 cd 
 ```
