@@ -1,0 +1,510 @@
+[09/Aug/2023 09:36:55] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 09:36:57] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 09:36:57] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 09:36:57] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 09:47:25] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 09:47:25] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 09:47:38] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 09:47:38] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 09:48:06] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 09:48:07] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 09:48:09] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 09:48:09] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 09:48:09] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 09:48:11] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 09:48:11] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 09:48:11] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 09:48:13] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 09:48:13] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 09:48:13] INFO [django.server] "GET /static/js/main.6d7d317e.js.map HTTP/1.1" 200 1196077
+[09/Aug/2023 09:48:13] INFO [django.server] "GET /static/css/main.dde82260.css.map HTTP/1.1" 304 0
+[09/Aug/2023 09:49:57] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 09:49:59] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 09:50:00] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 09:50:00] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 09:50:02] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 09:50:02] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 09:51:43] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/urls.py changed, reloading.
+[09/Aug/2023 09:51:43] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 09:55:43] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 09:55:45] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 09:55:45] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 09:55:45] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 09:55:47] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 09:55:47] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 09:58:18] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 09:58:19] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 09:58:20] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 09:58:20] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:00:35] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 10:00:36] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:00:38] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 10:00:38] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:00:38] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:00:38] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 10:00:38] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:00:38] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:00:40] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:00:40] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:00:41] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 10:00:41] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:00:41] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:01:32] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:01:34] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 10:01:34] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:01:34] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:01:38] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:01:38] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:02:51] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:02:53] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 10:02:53] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:02:53] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:02:56] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:02:56] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:03:46] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:03:48] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 10:03:48] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:03:48] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:03:50] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:03:50] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:03:59] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:04:01] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 10:04:01] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:04:01] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:04:04] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:04:04] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:05:34] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:05:36] INFO [django.server] "GET / HTTP/1.1" 200 644
+[09/Aug/2023 10:05:37] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:05:37] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:05:40] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:05:40] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:07:54] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:07:56] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:07:56] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:07:56] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:07:59] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:07:59] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:08:22] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:08:25] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:08:25] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:08:25] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:08:27] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:08:27] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:08:27] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:08:28] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:08:28] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:08:28] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:08:51] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:08:51] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:08:51] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:08:52] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:08:52] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:08:52] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:08:53] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:08:53] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:08:53] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:08:57] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:08:58] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:08:59] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:08:59] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:09:00] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:09:00] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:09:00] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:09:31] WARNING [django.request] Not Found: /manifest.json
+[09/Aug/2023 10:09:31] WARNING [django.server] "GET /manifest.json HTTP/1.1" 404 3471
+[09/Aug/2023 10:19:26] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:19:26] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:19:39] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/urls.py changed, reloading.
+[09/Aug/2023 10:19:40] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:19:49] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/urls.py changed, reloading.
+[09/Aug/2023 10:19:49] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:20:03] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/urls.py changed, reloading.
+[09/Aug/2023 10:20:03] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:20:05] ERROR [django.request] Internal Server Error: /manifest.json
+Traceback (most recent call last):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py", line 8, in mainfest
+    return render(request, 'frontend/public/manifest.json')
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: frontend/public/manifest.json
+[09/Aug/2023 10:20:05] ERROR [django.server] "GET /manifest.json HTTP/1.1" 500 84477
+[09/Aug/2023 10:20:14] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:20:14] ERROR [django.request] Internal Server Error: /manifest.json
+Traceback (most recent call last):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py", line 8, in mainfest
+    return render(request, 'frontend/public/manifest.json')
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: frontend/public/manifest.json
+[09/Aug/2023 10:20:14] ERROR [django.server] "GET /manifest.json HTTP/1.1" 500 83448
+[09/Aug/2023 10:20:17] ERROR [django.request] Internal Server Error: /manifest.json
+Traceback (most recent call last):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py", line 8, in mainfest
+    return render(request, 'frontend/public/manifest.json')
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: frontend/public/manifest.json
+[09/Aug/2023 10:20:17] ERROR [django.server] "GET /manifest.json HTTP/1.1" 500 83445
+[09/Aug/2023 10:20:19] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:20:19] ERROR [django.request] Internal Server Error: /manifest.json
+Traceback (most recent call last):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py", line 8, in mainfest
+    return render(request, 'frontend/public/manifest.json')
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: frontend/public/manifest.json
+[09/Aug/2023 10:20:19] ERROR [django.server] "GET /manifest.json HTTP/1.1" 500 83448
+[09/Aug/2023 10:20:26] ERROR [django.request] Internal Server Error: /manifest.json
+Traceback (most recent call last):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py", line 8, in mainfest
+    return render(request, 'frontend/public/manifest.json')
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: frontend/public/manifest.json
+[09/Aug/2023 10:20:26] ERROR [django.server] "GET /manifest.json HTTP/1.1" 500 84340
+[09/Aug/2023 10:22:37] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:22:38] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:22:41] ERROR [django.request] Internal Server Error: /manifest.json
+Traceback (most recent call last):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py", line 8, in mainfest
+    with open('frontend/public/manifest.json', 'r', 'UTF-8'):
+TypeError: 'str' object cannot be interpreted as an integer
+[09/Aug/2023 10:22:41] ERROR [django.server] "GET /manifest.json HTTP/1.1" 500 69394
+[09/Aug/2023 10:23:55] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:23:55] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:24:00] ERROR [django.request] Internal Server Error: /manifest.json
+Traceback (most recent call last):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 204, in _get_response
+    self.check_response(response, callback)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 332, in check_response
+    raise ValueError(
+ValueError: The view cloud_store_backend.views.mainfest didn't return an HttpResponse object. It returned None instead.
+[09/Aug/2023 10:24:00] ERROR [django.server] "GET /manifest.json HTTP/1.1" 500 70980
+[09/Aug/2023 10:24:51] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:24:52] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:24:54] ERROR [django.request] Internal Server Error: /manifest.json
+Traceback (most recent call last):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py", line 11, in mainfest
+    return render(request, text)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/base.py", line 17, in get_template
+    for origin in self.get_template_sources(template_name):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/cached.py", line 70, in get_template_sources
+    yield from loader.get_template_sources(template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/filesystem.py", line 35, in get_template_sources
+    name = safe_join(template_dir, template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/utils/_os.py", line 17, in safe_join
+    final_path = abspath(join(base, *paths))
+  File "/usr/lib/python3.10/posixpath.py", line 90, in join
+    genericpath._check_arg_types('join', a, *p)
+  File "/usr/lib/python3.10/genericpath.py", line 152, in _check_arg_types
+    raise TypeError(f'{funcname}() argument must be str, bytes, or '
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'dict'
+[09/Aug/2023 10:24:54] ERROR [django.server] "GET /manifest.json HTTP/1.1" 500 138781
+[09/Aug/2023 10:25:04] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:25:04] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:25:07] ERROR [django.request] Internal Server Error: /manifest.json
+Traceback (most recent call last):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py", line 11, in mainfest
+    return render(request, text)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/base.py", line 17, in get_template
+    for origin in self.get_template_sources(template_name):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/cached.py", line 70, in get_template_sources
+    yield from loader.get_template_sources(template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/filesystem.py", line 35, in get_template_sources
+    name = safe_join(template_dir, template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/utils/_os.py", line 17, in safe_join
+    final_path = abspath(join(base, *paths))
+  File "/usr/lib/python3.10/posixpath.py", line 90, in join
+    genericpath._check_arg_types('join', a, *p)
+  File "/usr/lib/python3.10/genericpath.py", line 152, in _check_arg_types
+    raise TypeError(f'{funcname}() argument must be str, bytes, or '
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'dict'
+[09/Aug/2023 10:25:07] ERROR [django.server] "GET /manifest.json HTTP/1.1" 500 138785
+[09/Aug/2023 10:25:13] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:25:14] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:25:15] ERROR [django.request] Internal Server Error: /manifest.json
+Traceback (most recent call last):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/exception.py", line 56, in inner
+    response = get_response(request)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py", line 12, in mainfest
+    return render(request, text)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/backends/django.py", line 33, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/engine.py", line 175, in get_template
+    template, origin = self.find_template(template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/engine.py", line 157, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/base.py", line 17, in get_template
+    for origin in self.get_template_sources(template_name):
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/cached.py", line 70, in get_template_sources
+    yield from loader.get_template_sources(template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/template/loaders/filesystem.py", line 35, in get_template_sources
+    name = safe_join(template_dir, template_name)
+  File "/home/adminpy/.local/lib/python3.10/site-packages/django/utils/_os.py", line 17, in safe_join
+    final_path = abspath(join(base, *paths))
+  File "/usr/lib/python3.10/posixpath.py", line 90, in join
+    genericpath._check_arg_types('join', a, *p)
+  File "/usr/lib/python3.10/genericpath.py", line 152, in _check_arg_types
+    raise TypeError(f'{funcname}() argument must be str, bytes, or '
+TypeError: join() argument must be str, bytes, or os.PathLike object, not 'dict'
+[09/Aug/2023 10:25:15] ERROR [django.server] "GET /manifest.json HTTP/1.1" 500 138804
+[09/Aug/2023 10:25:34] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:25:35] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:25:36] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 0
+[09/Aug/2023 10:25:40] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 0
+[09/Aug/2023 10:25:43] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 0
+[09/Aug/2023 10:25:46] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:25:46] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 0
+[09/Aug/2023 10:25:48] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:25:48] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 0
+[09/Aug/2023 10:25:51] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:25:51] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 0
+[09/Aug/2023 10:25:51] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:25:51] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 0
+[09/Aug/2023 10:25:51] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:25:51] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 0
+[09/Aug/2023 10:25:52] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:25:52] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 0
+[09/Aug/2023 10:25:58] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:25:58] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 0
+[09/Aug/2023 10:26:03] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:26:04] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:26:05] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:26:05] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 62
+[09/Aug/2023 10:26:07] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 62
+[09/Aug/2023 10:26:12] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 62
+[09/Aug/2023 10:26:13] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 62
+[09/Aug/2023 10:26:14] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 62
+[09/Aug/2023 10:26:16] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:26:16] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 62
+[09/Aug/2023 10:26:18] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:26:18] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 62
+[09/Aug/2023 10:26:30] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:26:31] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:26:32] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:26:32] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 62
+[09/Aug/2023 10:26:35] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:26:35] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 62
+[09/Aug/2023 10:26:39] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:26:40] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 62
+[09/Aug/2023 10:27:42] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:27:43] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:27:49] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:27:49] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:27:49] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:27:49] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:27:52] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:27:52] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:27:52] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:27:52] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:28:03] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:28:03] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:28:03] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:28:03] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:28:29] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:28:30] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:29:28] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 10:29:28] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:29:33] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:29:33] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:29:33] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:29:33] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:29:34] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:29:34] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:29:34] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:29:34] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:29:35] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:29:35] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:29:35] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:29:35] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:29:35] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:29:35] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:29:35] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:29:35] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:29:36] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:29:36] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:29:36] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:29:36] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:29:37] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:29:37] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:29:37] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:29:37] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:29:37] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:29:37] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:29:38] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:29:38] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:29:39] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:29:39] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:29:39] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:29:39] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:29:51] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:29:53] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:29:55] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/views.py changed, reloading.
+[09/Aug/2023 10:29:56] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:29:58] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:29:58] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:29:59] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:29:59] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:30:10] WARNING [django.request] Not Found: /favicon.ico
+[09/Aug/2023 10:30:10] WARNING [django.server] "GET /favicon.ico HTTP/1.1" 404 3578
+[09/Aug/2023 10:30:10] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:30:10] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:30:10] INFO [django.server] - Broken pipe from ('127.0.0.1', 41448)
+[09/Aug/2023 10:30:10] WARNING [django.request] Not Found: /logo512.png
+[09/Aug/2023 10:30:10] WARNING [django.server] "GET /logo512.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:30:10] INFO [django.server] - Broken pipe from ('127.0.0.1', 41456)
+[09/Aug/2023 10:35:00] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 10:35:01] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:35:08] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 10:35:09] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:35:21] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 10:35:22] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:35:32] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 10:35:48] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:36:13] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 10:36:14] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:36:19] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 10:36:20] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:36:48] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 10:36:48] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:37:16] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 10:37:17] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:37:20] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:37:20] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:37:20] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:37:20] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:37:20] WARNING [django.request] Not Found: /favicon.ico
+[09/Aug/2023 10:37:20] WARNING [django.server] "GET /favicon.ico HTTP/1.1" 404 3578
+[09/Aug/2023 10:37:20] INFO [django.server] - Broken pipe from ('127.0.0.1', 50792)
+[09/Aug/2023 10:37:20] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:37:20] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:37:21] WARNING [django.request] Not Found: /logo512.png
+[09/Aug/2023 10:37:21] WARNING [django.server] "GET /logo512.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:37:21] INFO [django.server] - Broken pipe from ('127.0.0.1', 50796)
+[09/Aug/2023 10:37:21] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:37:21] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 386
+[09/Aug/2023 10:37:21] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:37:21] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:37:21] WARNING [django.request] Not Found: /favicon.ico
+[09/Aug/2023 10:37:21] WARNING [django.server] "GET /favicon.ico HTTP/1.1" 404 3578
+[09/Aug/2023 10:37:22] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:37:22] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:37:22] WARNING [django.request] Not Found: /logo512.png
+[09/Aug/2023 10:37:22] WARNING [django.server] "GET /logo512.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:37:36] INFO [django.utils.autoreload] /home/adminpy/Desktop/cloud_store_backend/cloud_store_backend/cloud_store_backend/settings.py changed, reloading.
+[09/Aug/2023 10:37:37] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:49:08] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:49:09] INFO [django.server] "GET / HTTP/1.1" 200 645
+[09/Aug/2023 10:49:10] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 387
+[09/Aug/2023 10:49:10] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:49:10] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:49:10] WARNING [django.request] Not Found: /favicon.ico
+[09/Aug/2023 10:49:10] WARNING [django.server] "GET /favicon.ico HTTP/1.1" 404 3578
+[09/Aug/2023 10:49:10] WARNING [django.request] Not Found: /logo192.png
+[09/Aug/2023 10:49:10] WARNING [django.server] "GET /logo192.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:49:10] WARNING [django.request] Not Found: /logo512.png
+[09/Aug/2023 10:49:10] WARNING [django.server] "GET /logo512.png HTTP/1.1" 404 3578
+[09/Aug/2023 10:49:10] INFO [django.server] - Broken pipe from ('127.0.0.1', 34970)
+[09/Aug/2023 10:49:46] INFO [django.utils.autoreload] Watching for file changes with StatReloader
+[09/Aug/2023 10:49:48] INFO [django.server] "GET / HTTP/1.1" 200 551
+[09/Aug/2023 10:49:50] INFO [django.server] "GET / HTTP/1.1" 200 551
+[09/Aug/2023 10:49:51] INFO [django.server] "GET / HTTP/1.1" 200 551
+[09/Aug/2023 10:49:54] INFO [django.server] "GET / HTTP/1.1" 200 551
+[09/Aug/2023 10:49:55] INFO [django.server] "GET / HTTP/1.1" 200 551
+[09/Aug/2023 10:49:58] INFO [django.server] "GET / HTTP/1.1" 200 551
+[09/Aug/2023 10:49:59] INFO [django.server] "GET / HTTP/1.1" 200 551
+[09/Aug/2023 10:50:18] INFO [django.server] "GET /manifest.json HTTP/1.1" 200 387
+[09/Aug/2023 10:50:28] INFO [django.server] "GET / HTTP/1.1" 200 551

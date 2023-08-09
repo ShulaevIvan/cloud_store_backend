@@ -3,6 +3,22 @@
 https://github.com/ShulaevIvan/cloud_store_frontend
 
 
+### Настройки SETTINGS.py 
+
+- USERS_STORE_DIR = 'users_store'  - настройка папки хранилища
+- SERVER_URL = 'http://localhost:8000'  - настройка папки хранилища
+- STATIC_URL = 'static/' - папка статики django + react
+- MEDIA_URL = 'media/' - папка медиафайлов
+- STATIC_ROOT = join(BASE_DIR, 'static/') главная папка статики
+- STATICFILES_DIRS=[(os.path.join(BASE_DIR,'frontend/build/static/'))] путь к билду react
+- MEDIA_ROOT = join(BASE_DIR, 'media') - главная папка media
+
+- ADMIN_USER = 'admin' - если не создать superuser вручную создает пользователя с этим логином
+- ADMIN_PASSWORD = 'admin2' если не создать superuser вручную добавляет пароль 
+- ADMIN_EMAIL = 'testemail22.ru' если не создать superuser вручную добавляет email 
+
+- LOG_FOLDER = 'cloud_store_log' папка где создаются копии логов
+
 ## Инструкция по развертыванию приложения:
 
 ### ubuntu 22.03

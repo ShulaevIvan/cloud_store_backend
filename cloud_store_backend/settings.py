@@ -8,13 +8,18 @@ USERS_STORE_DIR = 'users_store'
 SERVER_URL = 'http://localhost:8000'
 STATIC_URL = 'static/'
 MEDIA_URL = 'media/'
-STATIC_ROOT = join(BASE_DIR, 'static/')
-STATICFILES_DIRS=[(os.path.join(BASE_DIR,'frontend/build/static/'))]
+STATIC_ROOT = join(BASE_DIR, 'frontend/build/')
+STATICFILES_DIRS=[(os.path.join(BASE_DIR,'frontend/build/static/')),  os.path.join(BASE_DIR, 'frontend/public/'),]
 MEDIA_ROOT = join(BASE_DIR, 'media')
 
 ADMIN_USER = 'admin'
 ADMIN_PASSWORD = 'admin2'
 ADMIN_EMAIL = 'testemail22.ru'
+
+LOG_FOLDER = 'cloud_store_log'
+
+print(f'{STATIC_ROOT}')
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -161,20 +166,26 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'standard'
         },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'formatter': 'standard',
+            'filename': f'{LOG_FOLDER}/debug.log'
+        },
     },
     'loggers': {
         'django': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'propagate': True,
             'level': 'INFO',
         },
         'django.db.backends': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'ERROR',
             'propagate': False,
         },
         'apps': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file'],
             'level': 'DEBUG',
         },
     }

@@ -22,7 +22,7 @@ from django.urls import path
 from django.conf import settings
 from rest_framework.authtoken.models import Token
 
-from .views import index
+from .views import index, mainfest
 from api.views import LoginUserView, LogoutUserView, SingupUserView, UsersView, GetUserFiles, UserFileControl, UsersControl, UsersDetail, download_file_by_id
 from users.models import CloudUser
 
@@ -40,7 +40,10 @@ if len(count_admin_users) == 0:
     Token.objects.get_or_create(user=user)
 
     if not os.path.exists(user.store_path):
-        os.mkdir(user.store_path)
+        os.mkdir(f'{os.getcwd()}/{user.store_path}')
+
+if not os.path.exists(settings.LOG_FOLDER):
+    os.mkdir(f'{os.getcwd()}/{settings.LOG_FOLDER}')
     
    
 
@@ -58,5 +61,6 @@ urlpatterns = [
     path('api/user/control/', UsersControl.as_view()),
     path('api/users/user_files/', UserFileControl.as_view()),
     path('user/file/<file_uid>/', download_file_by_id),
+    path('manifest.json', mainfest)
         # path('test_token/', test_token),
 ]
