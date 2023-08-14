@@ -17,7 +17,6 @@
     flex-direction: column;
     max-width: 33%;
     border: 1px solid;
-    min-width: 180px;
     padding: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
@@ -90,7 +89,7 @@
 }
 .admin-users-logout-admin-btn::before {
     content: '\1F6C7';
-    font-size: 23px;
+    font-size: 19px;
     min-width: 20px;
     cursor: pointer;
     color: black;
@@ -118,6 +117,19 @@
 }
 .admin-register-form .register-from{
     margin-left: 0;
-    width: 600px;
+    width: 800px;
     margin-top: 0;
+    margin-bottom: 10px;
+}
+.admin-user-files-panel-popup-wrap .upload-btn-wrap a  {
+    border: 1px solid white;
+    margin-left: 10px;
+    color: black;
+}
+.admin-user-files-panel-popup-wrap .comment-file-input-wrap {
+    max-width: 500px;
+}
+.admin-user-files-panel-popup-wrap .upload-file-form-wrap {
+    max-width: 700px;
+    margin-left: 10px;
 }

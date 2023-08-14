@@ -2,10 +2,9 @@ import React from 'react'
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { authenticateUser, logoutUser, saveUserData } from "../../redux/slices/userSlice";
+import { authenticateUser, logoutUser, saveUserData, addAuthUser } from "../../redux/slices/userSlice";
 
 const LoginForm = () => {
-
     const initialState = {
         loginStatus: true,
         loginInputRef: useRef(null),
@@ -39,6 +38,7 @@ const LoginForm = () => {
                     if (data.token) {
                         dispatch(authenticateUser());
                         dispatch(saveUserData(data));
+                        dispatch(addAuthUser({userId: data.user.id, auth: data.auth}));
                         setLoginFormState(prevState => ({
                             ...prevState,
                             loginStatus: prevState.loginStatus = true,

@@ -2,9 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 import UserFilesAdminPopup from "../userFilesAdminPopup/UserFilesAdminPopup";
 import RegisterForm from "../registerForm/RegisterForm";
+import { useSelector} from "react-redux";
 
 const AdminPanel = (props) => {
-    const initialState = { users: []};
+    let authUsers = useSelector((state) => state.user.authUsers);
+    if (JSON.parse(localStorage.getItem('authUsers'))) authUsers = JSON.parse(localStorage.getItem('authUsers'));
+    const initialState = { users: [], authUsers: authUsers};
     const storageUserData = JSON.parse(localStorage.getItem('userData'));
     const userData = props.userData;
     const [otherUsers, setOtherUsers] = useState(initialState);
@@ -28,7 +31,7 @@ const AdminPanel = (props) => {
             .then(() => {
                 setOtherUsers(prevState => ({
                     ...prevState,
-                    users: prevState.users = prevState.users.filter((item) => item.id !== targetUserId)
+                    users: prevState.users = prevState.users.filter((item) => item.id !== targetUserId),
                 }));
             })
         }
@@ -117,8 +120,8 @@ const AdminPanel = (props) => {
                 setUserFilesPanel(prevState => ({
                     ...prevState,
                     targetUserId: prevState.targetUserId = targetUserId,
-                    targetUserFiles: prevState.targetUserFiles = data,
-                    activePanel: prevState.activePanel = true
+                    targetUserFiles: prevState.targetUserFiles = data.sort((a, b) => new Date(a.file_created_time) - new Date(b.file_created_time)).reverse(),
+                    activePanel: prevState.activePanel = true,
                 }));
             });
         }
@@ -139,8 +142,6 @@ const AdminPanel = (props) => {
         }));
     };
 
-
-
     useEffect(() => {
         const fetchFunc = async () => {
             fetch(`${process.env.REACT_APP_BACKEND_URL}/api/usersdetail/`, {
@@ -156,11 +157,16 @@ const AdminPanel = (props) => {
                     ...prevState,
                     users: [...data.users].filter((user) => user.id !== userData.user.id),
                 }));
+                localStorage.setItem('otherUsers', JSON.stringify(data.users))
             })
         }
         fetchFunc();
     // eslint-disable-next-line
     }, [userFilesPanel.activePanel, userFilesPanel.activeRegister]);
+
+    useEffect(() => {
+        localStorage.setItem('authUsers', JSON.stringify(authUsers));
+    }, [authUsers])
 
 
 
@@ -183,12 +189,14 @@ const AdminPanel = (props) => {
                         closePopupHandler = {userFilesAdminPopupCloseHandler} 
                         userFiles = {userFilesPanel.targetUserFiles} /> : null}
                 {otherUsers.users.map((item) => {
+                    const userAuth = authUsers.find((u) => u.userId === item.id && u.auth === true);
+
                     return (
                         <React.Fragment key={Math.random()}>
                             <div className="admin-other-users-item-wrap">
                                 <div className="admin-other-users-item-controls-wrap">
                                     <div className="admin-other-users-item-controls-addadmin-btn-wrap">
-                                        <span className={item.auth ? 'admin-users-logout-admin-btn' : 'admin-users-logout-admin-deactive-btn'}
+                                        <span className={userAuth ? 'admin-users-logout-admin-btn' : 'admin-users-logout-admin-deactive-btn'}
                                             onClick={() => logoutAdminHandler(item.id)}
                                         ></span>
                                         <span 

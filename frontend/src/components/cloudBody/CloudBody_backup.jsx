@@ -234,15 +234,11 @@ const CloudBody = () => {
     };
 
     const getDownloadTime = (date) => {
-        if (!date) return ''
         const time = new Date(date);
         const plus = time.toString().match(/[+]/);
         const min = time.toString().match(/[-]/);
-        // eslint-disable-next-line
         const difHours = time.toString().match(/\GMT\S+/);
-        
         if (plus[0] && difHours[0]) {
-            // eslint-disable-next-line
             const hours = time.getHours() + Number(difHours[0].replace(/\GMT/, '').replace(/\+/, '').replace(/0/g, ''));
             time.setHours(hours);
             if (new Date().getFullYear() - time.getFullYear() > 25) {
@@ -251,7 +247,6 @@ const CloudBody = () => {
             return String(time);
         }
         else if (min[0] && difHours[0]) {
-            // eslint-disable-next-line
             const hours = time.getHours() - Number(difHours[0].replace(/\GMT/, '').replace(/\-/, '').replace(/0/g, ''));
             time.setHours(hours);
             if (new Date().getFullYear() - time.getFullYear() > 25) {

@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     width: 100%;
     max-width: 800px;
-    position: fixed;
+    position: absolute;
     border: 1px solid;
     min-height: 300px;
     top: 25%;
@@ -31,4 +31,8 @@
     justify-content: center;
     align-items: center;
     min-height: 300px;
+}
+.share-file-link-wrap h3 {
+    max-width: 500px;
+    overflow: hidden;
 }

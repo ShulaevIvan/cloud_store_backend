@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import { logoutUser} from "../../redux/slices/userSlice";
+import { logoutUser, removeAuthUser} from "../../redux/slices/userSlice";
 import { useLocation } from "react-router-dom";
 
 
@@ -47,9 +47,9 @@ const HeaderMenu = () => {
             })
             .then((response) => response.json())
             .then((data) => {
-                const storageUserData = JSON.parse(localStorage.getItem('userData'))
+                const storageUserData = JSON.parse(localStorage.getItem('userData'));
                 if (storageUserData) {
-                    storageUserData.auth = false;
+                    storageUserData.auth = data.status ? false : true;
                     storageUserData.user.userAuthenticated = false;
                 }
 
@@ -58,7 +58,9 @@ const HeaderMenu = () => {
                     ...prevState,
                     menuActive: false,
                 }));
+                dispatch(removeAuthUser(storageUserData.user.id));
                 dispatch(logoutUser());
+
                 setTimeout(() => {
                     navigate('/');
                 }, 10);

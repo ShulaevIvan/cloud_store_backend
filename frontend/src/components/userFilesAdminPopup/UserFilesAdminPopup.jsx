@@ -124,6 +124,39 @@ const UserFilesAdminPopup = (props) => {
         fetchFunc();
     };
 
+    const getCorrectTime = (date) => {
+        const time = new Date(date);
+        const plus = time.toString().match(/[+]/);
+        const min = time.toString().match(/[-]/);
+        // eslint-disable-next-line
+        const difHours = time.toString().match(/\GMT\S+/);
+        
+        if (plus[0] && difHours[0]) {
+            // eslint-disable-next-line
+            const hours = time.getHours() + Number(difHours[0].replace(/\GMT/, '').replace(/\+/, '').replace(/0/g, ''));
+            time.setHours(hours);
+            if (new Date().getFullYear() - time.getFullYear() > 25) {
+                return '';
+            }
+            // eslint-disable-next-line
+            return String(time).replace(/\GMT.+$/, '');
+        }
+        else if (min[0] && difHours[0]) {
+            // eslint-disable-next-line
+            const hours = time.getHours() - Number(difHours[0].replace(/\GMT/, '').replace(/\-/, '').replace(/0/g, ''));
+            time.setHours(hours);
+            if (new Date().getFullYear() - time.getFullYear() > 25) {
+                return '';
+            }
+            // eslint-disable-next-line
+            return String(time).replace(/\GMT.+$/, '');
+        }
+        if (new Date().getFullYear() - time.getFullYear() > 25) {
+            return '';
+        }
+        // eslint-disable-next-line
+        return String(time).replace(/\GMT.+$/, '');
+    };
 
     return (
         <React.Fragment>
@@ -146,8 +179,10 @@ const UserFilesAdminPopup = (props) => {
                                             placeholder={fileObj.file_comment}
                                             ref={userFilesAdmin.renameCommentRef} 
                                         />
-                                        <button className="rename-input-ok-btn" onClick={() => renameFileOkHandler(fileObj)}>Ok</button>
-                                        <button className="rename-input-cancel-btn" onClick={renameFileCancelHandler}>Cancel</button>
+                                        <div className="admin-user-rename-control-wrap">
+                                            <button className="rename-input-ok-btn" onClick={() => renameFileOkHandler(fileObj)}>Ok</button>
+                                            <button className="rename-input-cancel-btn" onClick={renameFileCancelHandler}>Cancel</button>
+                                        </div>
                                     </div> : 
                                 null }
                                 <div className="admin-user-files-control-item">
@@ -165,11 +200,12 @@ const UserFilesAdminPopup = (props) => {
                                     </span>
                                 </div>
                                 <div className="file-info-wrap">
+                                    {console.log(fileObj)}
                                     <p>File Name: {fileObj.file_name}</p>
                                     <p>File Type: {fileObj.file_type}</p>
                                     <p>Comment: {fileObj.file_comment}</p>
-                                    <p>Created Time: {fileObj.file_created_time}</p>
-                                    <p>Last Download Time: {fileObj.file_last_download_time}</p>
+                                    <p>Created Time: {getCorrectTime(fileObj.file_created_time)}</p>
+                                    <p>Last Download Time: {getCorrectTime(fileObj.file_last_download_time)}</p>
                                     <p>File Url: <a href={`${fileObj.file_url}`}>{fileObj.file_url}</a></p>
                                 </div>
                             </div>

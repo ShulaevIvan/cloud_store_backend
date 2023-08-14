@@ -5,6 +5,7 @@ const initialState = {
     userAuthenticated: false,
     userFiels: [],
     adminViewFiles: [],
+    authUsers: [],
 };
 
 const userSlice = createSlice({
@@ -55,6 +56,15 @@ const userSlice = createSlice({
         adminViewUserFiles(state, action) {
             state.adminViewFiles = action.payload
         },
+        addAuthUser(state, action) {
+            state.authUsers = [...state.authUsers, action.payload]
+        },
+        removeAuthUser(state, action) {
+            state.authUsers = [...state.authUsers.filter((item) => item.userId !== action.payload)]
+        },
+        getAuthUser(state, payload) {
+            return state.authUsers.find((item) => item.userId === payload);
+        }
 
     }
 });
@@ -68,6 +78,9 @@ export const {
     replaceUserFiles, 
     removeUserFile, 
     renameUserFile, 
-    updateDownloadFile 
+    updateDownloadFile,
+    addAuthUser,
+    removeAuthUser,
+    getAuthUser,
 } = userSlice.actions;
 export default userSlice.reducer;

@@ -43,7 +43,7 @@ const RegisterForm = (props) => {
             error: false,
             errDescription: 'Ошибка: не менее 6 символов: как минимум одна заглавная буква, одна цифра и один специальный символ или пароли не совпадают',
             validate: () => {
-                const pattern = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
+                const pattern = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[@!#$%&? "]).*$/;
                 if (formState.passwordInput.passwordRef.current.value.match(pattern)) {
                     return false;
                 }
@@ -55,7 +55,7 @@ const RegisterForm = (props) => {
             error: false,
             errDescription: 'Ошибка: не менее 6 символов: как минимум одна заглавная буква, одна цифра и один специальный символ или пароли не совпадают',
             validate: () => {
-                const pattern = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#$%&? "]).*$/;
+                const pattern = /^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[@!#$%&? "]).*$/;
                 if (formState.confirmPasswordInput.confirmPasswordRef.current.value.match(pattern)) {
                     return false;
                 }

@@ -194,3 +194,7 @@ ALLOWED_HOSTS = ['31.31.202.214', 'localhost:8000', '31.31.202.214:8000',]
 sudo service nginx restart
 sudo service supervisor restart
 ```
+
+### Frontend repo 
+
+https://github.com/ShulaevIvan/cloud_store_frontend

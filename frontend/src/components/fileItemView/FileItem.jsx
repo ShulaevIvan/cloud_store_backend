@@ -16,7 +16,7 @@ const FileItem = (props) => {
                         onClick={() => {
                             props.downloadHandler(props.file_uid)
                         }}
-                        download={`${props.file_url}.${props.file_type.match(/\w+$/)[0]}`}
+                        download={`${props.file_url}.${props.file_type ? props.file_type.match(/\w+$/)[0] : ''}`}
                         href={props.file_url}
                         type={props.file_type}
                         target="_blank"
@@ -42,7 +42,7 @@ const FileItem = (props) => {
                             !videoTypes.includes(props.file_type) ?
                                 <img src="https://dummyimage.com/150x150/000/fff&text=FILE" /> : null}
                 </div>
-                <div className="cloud-item-file-type">{props.file_type.match(/\w+$/)[0]}</div>
+                <div className="cloud-item-file-type">{props.file_type ? props.file_type.match(/\w+$/)[0] : ''}</div>
                 <div className="cloud-item-comment"><span>Comment:</span> {props.file_comment}</div>
                 <div className="cloud-item-last-download">Last Download: {props.lastDownloadTime.replace(/\s(GMT)/, '').replace(/\+\d+\s+\(\w+\s+\w+\s+\w+\)/, '')}</div>
                 <div className="cloud-item-date-load">Upload Date: {props.lastUploadDate.replace(/\s(GMT)/, '').replace(/\+\d+\s+\(\w+\s+\w+\s+\w+\)/, '')}</div>

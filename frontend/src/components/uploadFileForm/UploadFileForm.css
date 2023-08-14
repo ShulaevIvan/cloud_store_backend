@@ -35,6 +35,9 @@
     flex-direction: row;
     flex-wrap: wrap;
 }
+.upload-file-form-controls button {
+    cursor: pointer;
+}
 .upload-file-form-btn-ok {
     display: flex;
     margin-right: 5px;

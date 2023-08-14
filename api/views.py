@@ -164,7 +164,6 @@ class UserFileControl(APIView):
                 user = CloudUser.objects.all().get(id=user_id)
                 target_file = CloudUserFiles.objects.get(user=user_id, file_uid = file_id)
                 old_file_path = target_file.file_path
-            
                 file_type = re.findall(r'\.(\w+|\d+)$', target_file.file_path)[0]
                 target_file.file_name = file_name
                 target_file.file_comment = file_comment

@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import FileType from "file-type/browser";
 import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUserFiles } from "../../redux/slices/userSlice";
 import { logoutUser } from "../../redux/slices/userSlice";
-import fileTypes from "./fileTypes";
-import { signatures } from "./fileTypes";
 
 const UploadFileFrom = (props) => {
     const storageUserData = JSON.parse(localStorage.getItem('userData'));
@@ -23,8 +22,6 @@ const UploadFileFrom = (props) => {
         commentInputRef: useRef(null),
         userFiles: userFiles,
         preloadData: undefined,
-        fileType: undefined,
-        uploadOkBtnActive: false,
     };
 
     const [uploadFormState, setUploadFormState] = useState(initialState);
@@ -51,59 +48,33 @@ const UploadFileFrom = (props) => {
             reader.readAsDataURL(files);
             reader.onloadend = () => {
                 let encoded = reader.result.toString().replace(/^data:(.*,)?/, '');
-                let secondFileType = undefined;
-                let secondExt = undefined;
                 if ((encoded.length % 4) > 0) {
                     encoded += '='.repeat(4 - (encoded.length % 4));
                 }
-                if (files.type === '') {
-                    const getMimeType = (base64)=>{
-                        for(const sign in signatures) {
-                            if(base64.startsWith(sign)) return signatures[sign];
-                        };
-                    };
-                    secondFileType = getMimeType(encoded);
-                }
-
-                if (secondFileType) {
-                    Object.keys(fileTypes).forEach((type) => {
-                        if (type === secondFileType) {
-                            secondExt = `.${fileTypes[type]}`
-                        }
-                    });
-                }
-                if (!secondExt) secondExt =  '.file';
-                
                 fileData = {
                     id: Math.random(),
                     url: url,
                     lastModif: files.lastModified,
                     lastModifDate: files.lastModifiedDate,
-                    type: files.type ? files.type : secondExt,
-                    name: files.type ? files.name : files.name + secondExt,
+                    type: files.type,
+                    name: files.name,
                     file: encoded,
                     date: new Date().getTime(),
                 };
-
-                setUploadBtnState(prevState => ({
-                    ...prevState,
-                    uploadOkBtnActive: prevState.uploadOkBtnActive = true,
-                }));
-
                 resolve(fileData);
+                
             };
+            
         })
         .then(async (data) => {
             return new Promise((resolve, reject) => {
-                if (!data.name) data.name = ''
                 const sendImageToDb = {
-                    file_name: data.type ? data.name : data.name + '.file',
-                    file_type: data.type ? data.type : '.file',
+                    file_name: data.name,
+                    file_type: data.type,
                     file_url: data.url,
                     user: targetUserId && isAdmin ? targetUserId : userData ? userData.user.id : storageUserData.user.id,
                     file_data: data.file,
                 };
-                console.log(sendImageToDb)
                 resolve(sendImageToDb)
             })
             .then((data) => {
@@ -116,19 +87,20 @@ const UploadFileFrom = (props) => {
     }
 
     const uploadFileHandler = async () => {
-        let files = uploadFormState.filesInput.current.files;
-        if (files.length > 1) {
+        const files = uploadFormState.filesInput.current.files;
+        console.log(files[0])
+        if (files.length > 1 || files[0].type === '') {
             uploadFormState.filesInput.current.value = ''
-            
             setUploadBtnState(prevState => ({
                 uploadBtnActive: prevState.uploadBtnActive = false,
             }));
             return;
         }
-        await getBase64(files); 
+        await getBase64(files);
     };
 
     const uploadOkFileHandler = async () => {
+
         return new Promise((resolve, reject) => {
             setUploadFormState(prevState => ({
                 ...prevState,
@@ -194,7 +166,6 @@ const UploadFileFrom = (props) => {
                     props.setUserAdminState(prevState => ({
                         ...prevState,
                         userFiles: prevState.userFiles = [...props.userAdminState, data]
-                            .sort((a, b) => new Date(a.file_created_time) - new Date(b.file_created_time)).reverse()
                     }));
                 })
             };
@@ -217,7 +188,7 @@ const UploadFileFrom = (props) => {
                     </div>
                     <div className="upload-file-form-controls">
                         <div className="upload-file-form-btn-ok">
-                            <button onClick={uploadOkFileHandler} disabled={!uploadBtnState.uploadOkBtnActive ? true : false}>OK</button>
+                            <button onClick={uploadOkFileHandler}>OK</button>
                         </div>
                         <div className="upload-file-form-btn-cancel">
                             <button onClick={uploadFileCancelBtn}>Cancel</button>

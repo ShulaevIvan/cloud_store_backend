@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     position: absolute;
     background-color: gray;
-    width: 90%;
+    min-width: 500px;
     z-index: 10;
     min-height: 200px;
 }
@@ -96,4 +96,19 @@
 }
 .rename-input-ok-btn, .rename-input-cancel-btn {
     margin-right: 2px;
+}
+.admin-user-files-item .rename-input-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.admin-user-rename-control-wrap {
+    display: flex;
+    flex-direction: row;
+}
+.admin-user-files-item .rename-input-wrap .rename-input-ok-btn {
+    display: flex;
+}
+.admin-user-files-item .rename-input-wrap .rename-input-cancel-btn {
+    display: flex;
 }
